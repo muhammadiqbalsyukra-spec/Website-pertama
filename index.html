@@ -3,17 +3,37 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Jasa Website Iqbal</title>
+<title>Iqbal Web Studio</title>
 
 <style>
 body {
   font-family: Arial, sans-serif;
-  background: #f4f6f9;
   margin: 0;
+  background: #f5f7fa;
+}
+
+.nav {
+  background: #0d6efd;
+  padding: 15px;
+  text-align: center;
+}
+
+.nav a {
+  color: white;
+  margin: 0 10px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.hero {
+  text-align: center;
+  padding: 40px 20px;
+  background: linear-gradient(135deg, #0d6efd, #00c6ff);
+  color: white;
 }
 
 .container {
-  max-width: 500px;
+  max-width: 600px;
   margin: auto;
   padding: 20px;
 }
@@ -23,11 +43,7 @@ body {
   padding: 20px;
   margin: 15px 0;
   border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-}
-
-h1, h2 {
-  text-align: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
 }
 
 .btn {
@@ -38,12 +54,6 @@ h1, h2 {
   padding: 12px;
   border-radius: 8px;
   text-decoration: none;
-  font-weight: bold;
-  margin-top: 10px;
-}
-
-.highlight {
-  color: #007bff;
   font-weight: bold;
 }
 
@@ -58,65 +68,63 @@ h1, h2 {
 
 <body>
 
+<div class="nav">
+<a href="#">Home</a>
+<a href="#jasa">Jasa</a>
+<a href="#portfolio">Portofolio</a>
+<a href="#contact">Kontak</a>
+</div>
+
+<div class="hero">
+<h1>Iqbal Web Studio 🚀</h1>
+<p>Jasa pembuatan website murah & cepat dari HP</p>
+<a class="btn" href="https://wa.me/628XXXXXXXXXX?text=Halo%20Iqbal,%20saya%20mau%20buat%20website">Pesan Sekarang</a>
+</div>
+
 <div class="container">
 
-<h1>Halo, Saya Iqbal 👋</h1>
-<p style="text-align:center;">Jasa pembuatan website profesional dari HP</p>
-
-<div class="card">
-<h2>💼 Jasa Saya</h2>
+<div class="card" id="jasa">
+<h2>💼 Layanan</h2>
 <ul>
-<li>Website sederhana</li>
-<li>Landing page jualan</li>
-<li>Blog pribadi</li>
+<li>Website UMKM</li>
+<li>Landing Page Jualan</li>
+<li>Blog Pribadi</li>
 </ul>
 </div>
 
 <div class="card">
-<h2>🎯 Kenapa pilih saya?</h2>
+<h2>🎯 Keunggulan</h2>
 <ul>
 <li>✔ Harga terjangkau</li>
 <li>✔ Proses cepat (1–2 hari)</li>
-<li>✔ Bisa request sesuai kebutuhan</li>
+<li>✔ Support revisi</li>
 </ul>
 </div>
 
 <div class="card">
 <h2>💰 Harga</h2>
-<p class="highlight">Mulai dari Rp50.000</p>
-<ul>
-<li>✔ Website siap online</li>
-<li>✔ Mobile friendly</li>
-<li>✔ Gratis revisi 1x</li>
-</ul>
+<p><b>Mulai Rp50.000</b></p>
+<p>✔ Website siap online<br>✔ Mobile friendly</p>
 </div>
 
-<div class="card portfolio">
+<div class="card portfolio" id="portfolio">
 <h2>🖼️ Portofolio</h2>
-<p>Contoh hasil website:</p>
-<img src="https://via.placeholder.com/400x200" alt="portfolio">
-<img src="https://via.placeholder.com/400x200" alt="portfolio">
+<img src="https://via.placeholder.com/400x200">
+<img src="https://via.placeholder.com/400x200">
 </div>
 
 <div class="card">
 <h2>⭐ Testimoni</h2>
-<p>"Website saya jadi dalam 1 hari, hasilnya keren!"<br><b>- Andi, UMKM</b></p>
-<p>"Pelayanan cepat dan mudah dihubungi."<br><b>- Rina</b></p>
+<p>"Website saya jadi cepat dan hasilnya rapi!"</p>
+<p>"Sangat recommended untuk pemula usaha."</p>
 </div>
 
-<div class="card">
-<h2>📞 Hubungi Saya</h2>
+<div class="card" id="contact">
+<h2>📞 Kontak</h2>
 <p>WA: 082285712293</p>
-<p>Lokasi: Monokwari</p>
+<p>Lokasi: Sorong</p>
 
-<a class="btn" href="https://wa.me/6282285712293?text=Halo%20saya%20mau%20buat%20website">
-Chat WhatsApp Sekarang
-</a>
-</div>
-
-<div class="card">
-<h2>🔥 Promo</h2>
-<p><b>Pesan hari ini, website jadi besok!</b></p>
+<a class="btn" href="https://wa.me/628XXXXXXXXXX?text=Halo%20Iqbal,%20saya%20tertarik%20jasa%20website">Chat WhatsApp</a>
 </div>
 
 </div>
