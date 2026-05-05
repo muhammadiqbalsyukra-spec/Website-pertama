@@ -1,86 +1,134 @@
-<!DOCTYPE html><html>
+<!DOCTYPE html>
+<html lang="id">
 <head>
-  <title>Iqbal Web Studio</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">  <style>
-    body {
-      font-family: Arial;
-      text-align: center;
-      padding: 40px;
-      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
-      color: white;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Katalog Toko</title>
 
-    .box {
-      background: rgba(255,255,255,0.1);
-      padding: 30px;
-      border-radius: 15px;
-      max-width: 400px;
-      margin: auto;
-    }
+<style>
+body {font-family: sans-serif; margin:0; background:#f5f5f5;}
+header {
+  background:#25D366; color:white;
+  padding:15px; font-size:18px;
+  display:flex; justify-content:space-between;
+}
+.grid {
+  display:grid;
+  grid-template-columns: repeat(2,1fr);
+  gap:10px; padding:10px;
+}
+.card {
+  background:white; border-radius:10px;
+  padding:10px; box-shadow:0 2px 5px rgba(0,0,0,0.1);
+}
+.card img {
+  width:100%; height:120px;
+  object-fit:cover; border-radius:8px;
+}
+.btn {
+  background:#25D366; color:white;
+  padding:10px; border:none;
+  border-radius:8px; width:100%;
+}
+.detail {display:none; padding:15px;}
+.qty {display:flex; gap:10px; align-items:center;}
+.qty button {padding:5px 10px;}
+.admin {font-size:12px; color:red;}
+</style>
 
-    .btn {
-      background: #25D366;
-      color: white;
-      padding: 15px 20px;
-      text-decoration: none;
-      border-radius: 8px;
-      display: inline-block;
-      margin-top: 15px;
-      font-weight: bold;
-    }
+</head>
 
-    .btn:hover {
-      background: #1ebe5d;
-    }
+<body>
 
-    img {
-      margin-top: 20px;
-      border-radius: 10px;
-      width: 100%;
-    }
+<header>
+  <div>Katalog Toko</div>
+  <button onclick="share()">Share</button>
+</header>
 
-    .section {
-      margin-top: 25px;
-    }
+<div id="catalog" class="grid"></div>
 
-  </style></head><body>  <div class="box"><h1>Iqbal Web Studio</h1>
-<p>Jasa Pembuatan Website Murah & Profesional</p>
+<div id="detail" class="detail"></div>
 
-<div class="section">
-  <h3>Kenapa pilih kami?</h3>
-  <p>
-    ✔ Harga terjangkau<br>
-    ✔ Cepat & responsif<br>
-    ✔ Bisa dari HP
-  </p>
-</div>
+<script>
 
-<div class="section">
-  <h3>Layanan Kami</h3>
-  <p>
-    🌐 Website bisnis<br>
-    🛒 Toko online<br>
-    📄 Landing page
-  </p>
-</div>
+let admin = true // ubah false kalau bukan admin
 
-<div class="section">
-  <h2>Mulai dari 150rb!</h2>
+let data = [
+  {
+    nama:"Bulgogi Pan",
+    harga:158000,
+    stok:10,
+    foto:"https://via.placeholder.com/300"
+  }
+]
 
-  <a class="btn" href="https://wa.me/6282285712293?text=Halo%20saya%20mau%20buat%20website">
-    Pesan via WhatsApp
-  </a>
+function render(){
+  let html=""
+  data.forEach((p,i)=>{
+    html+=`
+    <div class="card" onclick="detail(${i})">
+      <img src="${p.foto}">
+      <b>${p.nama}</b><br>
+      Rp${p.harga}<br>
+      Stok: ${p.stok}
+      ${admin ? `<div class="admin" onclick="edit(${i});event.stopPropagation()">Edit | Hapus</div>` : ""}
+    </div>`
+  })
+  document.getElementById("catalog").innerHTML=html
+}
 
-  <p style="margin-top:10px;">🔥 Promo terbatas bulan ini!</p>
-</div>
+function detail(i){
+  let p=data[i]
+  document.getElementById("catalog").style.display="none"
+  document.getElementById("detail").style.display="block"
 
-<div class="section">
-  <h3>Testimoni</h3>
-  <p>"Pelayanan cepat dan hasilnya bagus!"</p>
-  <p>- Andi, UMKM</p>
-</div>
+  document.getElementById("detail").innerHTML=`
+  <button onclick="back()">← Kembali</button>
+  <img src="${p.foto}" width="100%">
+  <h2>${p.nama}</h2>
+  <h3>Rp${p.harga}</h3>
+  <p>Stok: ${p.stok}</p>
 
-<img src="https://via.placeholder.com/400x250" alt="Contoh Website">
+  <div class="qty">
+    <button onclick="kurang()">-</button>
+    <span id="qty">1</span>
+    <button onclick="tambah()">+</button>
+  </div><br>
 
-  </div></body>
+  <button class="btn" onclick="wa(${i})">Pesan via WA</button>
+  `
+}
+
+function back(){
+  document.getElementById("catalog").style.display="grid"
+  document.getElementById("detail").style.display="none"
+}
+
+let q=1
+function tambah(){q++;document.getElementById("qty").innerText=q}
+function kurang(){if(q>1){q--;document.getElementById("qty").innerText=q}}
+
+function wa(i){
+  let p=data[i]
+  let total=p.harga*q
+  let text=`Halo, saya mau pesan:%0A${p.nama}%0AQty: ${q}%0ATotal: Rp${total}`
+  window.open(`https://wa.me/628xxxx?text=${text}`)
+}
+
+function share(){
+  navigator.share ? navigator.share({url:location.href}) : alert("Copy link manual")
+}
+
+function edit(i){
+  let nama=prompt("Nama baru",data[i].nama)
+  if(!nama)return
+  data[i].nama=nama
+  render()
+}
+
+render()
+
+</script>
+
+</body>
 </html>
