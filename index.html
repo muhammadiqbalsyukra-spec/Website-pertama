@@ -6,7 +6,7 @@
 <title>Katalog Toko Pro</title>
 
 <style>
-body {font-family:sans-serif;margin:0;background:#f2f2f2;}
+body{font-family:sans-serif;margin:0;background:#f2f2f2;}
 
 header{
   background:#25D366;
@@ -14,7 +14,16 @@ header{
   padding:15px;
   display:flex;
   justify-content:space-between;
-  align-items:center;
+}
+
+.form{padding:10px;background:white;}
+
+input{
+  width:100%;
+  padding:10px;
+  margin:5px 0;
+  border-radius:8px;
+  border:1px solid #ccc;
 }
 
 .grid{
@@ -36,7 +45,6 @@ header{
   height:140px;
   object-fit:cover;
   border-radius:10px;
-  background:#eee;
 }
 
 .btn{
@@ -49,36 +57,18 @@ header{
   font-weight:bold;
 }
 
-.detail{
-  display:none;
-  padding:15px;
-}
+.detail{display:none;padding:15px;}
 
-.qty{
-  display:flex;
-  gap:10px;
-  align-items:center;
-}
+.qty{display:flex;gap:10px;align-items:center;}
+.qty button{padding:6px 12px;}
 
-.qty button{
-  padding:6px 12px;
-}
+.admin{font-size:12px;color:red;}
 
-.form{
-  padding:10px;
-}
-
-input{
+.preview{
   width:100%;
-  padding:10px;
-  margin:5px 0;
-  border-radius:8px;
-  border:1px solid #ccc;
-}
-
-.admin-btn{
-  font-size:12px;
-  color:red;
+  height:120px;
+  object-fit:cover;
+  border-radius:10px;
   margin-top:5px;
 }
 </style>
@@ -95,8 +85,9 @@ input{
   <input type="text" id="nama" placeholder="Nama produk">
   <input type="number" id="harga" placeholder="Harga">
   <input type="number" id="stok" placeholder="Stok">
-  <input type="file" id="foto">
-  <button class="btn" onclick="tambahProduk()">+ Tambah Produk</button>
+  <input type="file" id="foto" onchange="previewImg()">
+  <img id="preview" class="preview" style="display:none">
+  <button class="btn" onclick="tambahProduk()">+ Simpan Produk</button>
 </div>
 
 <div id="catalog" class="grid"></div>
@@ -105,8 +96,7 @@ input{
 <script>
 
 let data = JSON.parse(localStorage.getItem("produk")) || []
-let admin = true
-let q = 1
+let q=1
 
 function simpan(){
   localStorage.setItem("produk", JSON.stringify(data))
@@ -121,38 +111,55 @@ function render(){
       <b>${p.nama}</b><br>
       Rp${p.harga}<br>
       Stok: ${p.stok}
-      ${admin ? `<div class="admin-btn" onclick="edit(${i});event.stopPropagation()">Edit | Hapus</div>` : ""}
+      <div class="admin" onclick="editProduk(${i});event.stopPropagation()">Edit | Hapus</div>
     </div>`
   })
   document.getElementById("catalog").innerHTML=html
+}
+
+function previewImg(){
+  let file=document.getElementById("foto").files[0]
+  let preview=document.getElementById("preview")
+
+  if(file){
+    preview.src=URL.createObjectURL(file)
+    preview.style.display="block"
+  }
 }
 
 function tambahProduk(){
   let nama=document.getElementById("nama").value
   let harga=document.getElementById("harga").value
   let stok=document.getElementById("stok").value
-  let file=document.getElementById("foto").files[0]
+  let fileInput=document.getElementById("foto")
+  let file=fileInput.files[0]
 
-  if(!nama || !harga || !stok) return alert("Isi lengkap!")
+  if(!nama || !harga || !stok){
+    alert("Isi semua data!")
+    return
+  }
 
-  let reader=new FileReader()
-  reader.onload=function(e){
-    data.push({
-      nama,
-      harga,
-      stok,
-      foto:e.target.result
-    })
+  function simpanProduk(foto){
+    data.push({nama,harga,stok,foto})
     simpan()
     render()
+
+    // reset form
+    document.getElementById("nama").value=""
+    document.getElementById("harga").value=""
+    document.getElementById("stok").value=""
+    fileInput.value=""
+    document.getElementById("preview").style.display="none"
   }
 
   if(file){
+    let reader=new FileReader()
+    reader.onload=function(e){
+      simpanProduk(e.target.result)
+    }
     reader.readAsDataURL(file)
   }else{
-    data.push({nama,harga,stok,foto:"https://picsum.photos/300"})
-    simpan()
-    render()
+    simpanProduk("https://picsum.photos/300")
   }
 }
 
@@ -195,11 +202,25 @@ function wa(i){
   window.open(`https://wa.me/628xxxxxxx?text=${text}`)
 }
 
-function edit(i){
-  if(confirm("Hapus produk?")){
-    data.splice(i,1)
-    simpan()
-    render()
+function editProduk(i){
+  if(confirm("Edit produk?")){
+    let nama=prompt("Nama",data[i].nama)
+    let harga=prompt("Harga",data[i].harga)
+    let stok=prompt("Stok",data[i].stok)
+
+    if(nama && harga && stok){
+      data[i].nama=nama
+      data[i].harga=harga
+      data[i].stok=stok
+      simpan()
+      render()
+    }
+  }else{
+    if(confirm("Hapus produk ini?")){
+      data.splice(i,1)
+      simpan()
+      render()
+    }
   }
 }
 
