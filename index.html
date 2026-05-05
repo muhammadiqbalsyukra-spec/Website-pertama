@@ -1,112 +1,80 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Katalog Toko App</title>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Katalog Toko</title>
 
 <style>
-body{margin:0;font-family:sans-serif;background:#f5f5f5}
+:root{
+  --primary:#0d6efd;
+  --green:#25D366;
+  --bg:#f5f5f5;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto;background:var(--bg);color:#222}
 
 /* HEADER */
 header{
-  background:white;
-  padding:10px;
-  position:sticky;
-  top:0;
-  z-index:10;
-  box-shadow:0 2px 6px rgba(0,0,0,0.1);
+  position:sticky;top:0;z-index:10;background:#fff;padding:10px;
+  box-shadow:0 2px 6px rgba(0,0,0,.08)
 }
-
-.search{
-  display:flex;
-  background:#eee;
-  border-radius:30px;
-  padding:10px;
-}
-
-.search input{
-  border:none;
-  background:transparent;
-  flex:1;
-  outline:none;
-}
+.search{display:flex;background:#eee;border-radius:999px;padding:10px}
+.search input{flex:1;border:none;background:transparent;outline:none}
 
 /* GRID */
-.grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:12px;
-  padding:12px;
-}
-
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;padding:12px}
 .card{
-  background:white;
-  border-radius:16px;
-  padding:10px;
-  box-shadow:0 4px 10px rgba(0,0,0,0.08);
+  background:#fff;border-radius:16px;padding:10px;
+  box-shadow:0 6px 14px rgba(0,0,0,.08);
+  transition:.15s;cursor:pointer
 }
-
-.card img{
-  width:100%;
-  height:140px;
-  object-fit:cover;
-  border-radius:12px;
-}
+.card:active{transform:scale(.97)}
+.thumb{width:100%;aspect-ratio:1/1;border-radius:12px;object-fit:cover;background:#eee}
+.title{font-weight:600;margin-top:6px}
+.price{color:var(--primary);font-weight:700}
 
 /* DETAIL */
 .detail{
-  position:fixed;
-  top:0;left:0;right:0;bottom:0;
-  background:white;
-  display:none;
-  overflow:auto;
-  z-index:20;
+  position:fixed;inset:0;background:#fff;z-index:20;display:none;overflow:auto
 }
-
 .detail img{width:100%}
-
-.detail-content{padding:15px}
-
-/* BUTTON */
+.d-body{padding:14px}
+.row{display:flex;align-items:center;gap:10px}
+.qty{display:flex;align-items:center;gap:10px}
+.qty button{padding:6px 10px}
 .btn{
-  background:#007bff;
-  color:white;
-  padding:14px;
-  border:none;
-  border-radius:12px;
-  width:100%;
+  border:none;border-radius:12px;padding:14px;font-weight:700;width:100%;
+}
+.btn-primary{background:var(--primary);color:#fff}
+.btn-wa{background:var(--green);color:#fff}
+
+/* CART BAR */
+.cartbar{
+  position:fixed;left:0;right:0;bottom:60px;background:#fff;
+  padding:10px 12px;display:flex;justify-content:space-between;align-items:center;
+  box-shadow:0 -4px 12px rgba(0,0,0,.1);border-top-left-radius:16px;border-top-right-radius:16px
+}
+.hide{display:none}
+
+/* NAV */
+.nav{
+  position:fixed;left:0;right:0;bottom:0;background:#fff;display:flex;justify-content:space-around;
+  padding:10px;box-shadow:0 -2px 10px rgba(0,0,0,.1)
 }
 
 /* FORM */
-.form{
-  padding:10px;
-  background:white;
+.form{padding:12px;background:#fff}
+input{width:100%;padding:10px;margin:6px 0;border-radius:10px;border:1px solid #ddd}
+
+/* BADGE */
+.badge{font-size:11px;background:#ff5252;color:#fff;padding:2px 6px;border-radius:6px;margin-left:6px}
+
+/* TOAST */
+.toast{
+  position:fixed;bottom:110px;left:50%;transform:translateX(-50%);
+  background:#333;color:#fff;padding:10px 14px;border-radius:10px;display:none
 }
-
-input{
-  width:100%;
-  padding:10px;
-  margin:5px 0;
-  border-radius:8px;
-  border:1px solid #ccc;
-}
-
-/* NAV */
-.bottom-nav{
-  position:fixed;
-  bottom:0;left:0;right:0;
-  background:white;
-  display:flex;
-  justify-content:space-around;
-  padding:10px;
-  box-shadow:0 -2px 10px rgba(0,0,0,0.1);
-}
-
-.page{display:none}
-.active{display:block}
-
-.qty{display:flex;gap:10px;align-items:center}
 </style>
 </head>
 
@@ -114,149 +82,221 @@ input{
 
 <header>
   <div class="search">
-    <input type="text" placeholder="Cari produk..." oninput="cari(this.value)">
+    <input placeholder="Cari produk..." oninput="cari(this.value)"/>
   </div>
 </header>
 
 <!-- HOME -->
-<div id="home" class="page active">
+<div id="home">
   <div id="catalog" class="grid"></div>
 </div>
 
-<!-- FORM -->
-<div id="menu" class="page">
+<!-- ADMIN FORM -->
+<div id="menu" style="display:none">
   <div class="form">
-    <input id="nama" placeholder="Nama produk">
-    <input id="harga" type="number" placeholder="Harga">
-    <input id="stok" type="number" placeholder="Stok">
-    <input type="file" id="foto">
-    <button class="btn" onclick="tambahProduk()">Tambah Produk</button>
+    <input id="nama" placeholder="Nama produk"/>
+    <input id="harga" type="number" placeholder="Harga (Rp)"/>
+    <input id="stok" type="number" placeholder="Stok"/>
+    <input id="desc" placeholder="Deskripsi (opsional)"/>
+    <input id="foto" type="file"/>
+    <button class="btn btn-primary" onclick="tambahProduk()">+ Simpan Produk</button>
   </div>
 </div>
 
 <!-- DETAIL -->
 <div id="detail" class="detail"></div>
 
+<!-- CART BAR -->
+<div id="cartbar" class="cartbar hide">
+  <div>
+    <div><b id="cartCount">0 item</b></div>
+    <div class="price" id="cartTotal">Rp0</div>
+  </div>
+  <button class="btn btn-wa" onclick="checkout()">Checkout WA</button>
+</div>
+
 <!-- NAV -->
-<div class="bottom-nav">
+<div class="nav">
   <div onclick="nav('home')">🏠</div>
   <div onclick="nav('home')">📦</div>
   <div onclick="nav('menu')">➕</div>
-  <div onclick="nav('menu')">☰</div>
+  <div onclick="toggleAdmin()">🔐</div>
 </div>
 
-<script>
+<div id="toast" class="toast"></div>
 
-let data = JSON.parse(localStorage.getItem("produk")) || []
+<script>
+/* ===== CONFIG ===== */
+const CONFIG = { wa: "6281234567890" } // ganti nomor WA
+
+/* ===== STATE ===== */
+let data = JSON.parse(localStorage.getItem("produk")||"[]")
+let cart = JSON.parse(localStorage.getItem("cart")||"[]")
+let admin = false
 let q = 1
 
-function simpan(){
+/* ===== UTILS ===== */
+const rp = n => "Rp" + Number(n||0).toLocaleString('id-ID')
+const save = () => {
   localStorage.setItem("produk", JSON.stringify(data))
+  localStorage.setItem("cart", JSON.stringify(cart))
 }
+const toast = (t)=>{ let el=document.getElementById('toast'); el.innerText=t; el.style.display='block'; setTimeout(()=>el.style.display='none',1500) }
 
+/* ===== RENDER ===== */
 function render(list=data){
-  let html=""
-  list.forEach((p,i)=>{
-    html+=`
-    <div class="card" onclick="lihat(${i})">
-      <img src="${p.foto}" onerror="this.src='https://picsum.photos/300?random=${i}'">
-      <b>${p.nama}</b><br>
-      Rp${Number(p.harga).toLocaleString()}
-    </div>`
-  })
-  document.getElementById("catalog").innerHTML=html
-}
-
-function tambahProduk(){
-  let nama=document.getElementById("nama").value.trim()
-  let harga=document.getElementById("harga").value.trim()
-  let stok=document.getElementById("stok").value.trim()
-  let file=document.getElementById("foto").files[0]
-
-  if(!nama || !harga){
-    alert("Nama & harga wajib!")
+  const el = document.getElementById("catalog")
+  if(!list.length){
+    el.innerHTML = `<div style="grid-column:1/3;text-align:center;color:#777">Belum ada produk</div>`
     return
   }
+  el.innerHTML = list.map((p,i)=>`
+    <div class="card" onclick="lihat(${i})">
+      <img class="thumb" src="${p.foto}" onerror="this.src='https://picsum.photos/300?${i}'">
+      <div class="title">${p.nama}${p.stok<5?'<span class="badge">Stok sedikit</span>':''}</div>
+      <div class="price">${rp(p.harga)}</div>
+    </div>
+  `).join("")
+}
 
-  function simpanData(foto){
-    data.push({
-      nama,
-      harga:Number(harga),
-      stok:Number(stok || 0),
-      foto
-    })
-    simpan()
-    render()
-    resetForm()
-    nav('home')
+/* ===== ADD PRODUCT ===== */
+function tambahProduk(){
+  const nama = document.getElementById("nama").value.trim()
+  const harga = Number(document.getElementById("harga").value)
+  const stok = Number(document.getElementById("stok").value||0)
+  const desc = document.getElementById("desc").value.trim()
+  const file = document.getElementById("foto").files[0]
+
+  if(!nama || !harga || harga<=0){ alert("Nama & harga wajib (harga > 0)"); return }
+
+  const done = (foto)=>{
+    data.push({nama,harga,stok,desc,foto})
+    save(); render(); nav('home'); resetForm()
+    toast("Produk ditambahkan")
   }
 
   if(file){
-    let reader=new FileReader()
-    reader.onload=e=>simpanData(e.target.result)
-    reader.readAsDataURL(file)
+    const r = new FileReader()
+    r.onload = e => done(e.target.result)
+    r.readAsDataURL(file)
   }else{
-    simpanData("https://picsum.photos/300?random="+Date.now())
+    done(`https://picsum.photos/300?${Date.now()}`)
   }
 }
 
 function resetForm(){
-  document.getElementById("nama").value=""
-  document.getElementById("harga").value=""
-  document.getElementById("stok").value=""
-  document.getElementById("foto").value=""
+  ["nama","harga","stok","desc","foto"].forEach(id=>{
+    const el = document.getElementById(id)
+    if(el.type==="file") el.value=""
+    else el.value=""
+  })
 }
 
+/* ===== DETAIL ===== */
 function lihat(i){
-  let p=data[i]
-  q=1
-
-  document.getElementById("detail").innerHTML=`
+  const p = data[i]; q=1
+  document.getElementById("detail").innerHTML = `
     <img src="${p.foto}">
-    <div class="detail-content">
+    <div class="d-body">
       <h2>${p.nama}</h2>
-      <h3>Rp${Number(p.harga).toLocaleString()}</h3>
+      <div class="price" style="font-size:20px">${rp(p.harga)}</div>
+      <div style="color:#666">Stok: ${p.stok}</div>
+      <details style="margin-top:8px"><summary>Deskripsi</summary><div>${p.desc||'-'}</div></details>
 
-      <div class="qty">
-        <button onclick="kurang()">-</button>
-        <span id="qty">1</span>
-        <button onclick="tambah()">+</button>
-      </div><br>
+      <div class="row" style="margin-top:10px">
+        <div class="qty">
+          <button onclick="kurang()">-</button>
+          <b id="qty">1</b>
+          <button onclick="tambah()">+</button>
+        </div>
+        <div style="margin-left:auto">${rp(p.harga*q)}</div>
+      </div>
 
-      <button class="btn" onclick="wa(${i})">Pesan via WA</button>
-      <br><br>
-      <button onclick="tutup()">Tutup</button>
-    </div>
-  `
+      <button class="btn btn-primary" style="margin-top:10px" onclick="addCart(${i})">+ Keranjang</button>
+      <button class="btn btn-wa" style="margin-top:8px" onclick="waNow(${i})">Pesan via WA</button>
+
+      ${admin?`
+      <div style="margin-top:10px;display:flex;gap:8px">
+        <button class="btn" onclick="edit(${i})">Edit</button>
+        <button class="btn" onclick="hapus(${i})">Hapus</button>
+      </div>`:''}
+
+      <button style="margin-top:10px" onclick="tutup()">Tutup</button>
+    </div>`
   document.getElementById("detail").style.display="block"
 }
 
-function tutup(){
-  document.getElementById("detail").style.display="none"
+function tutup(){ document.getElementById("detail").style.display="none" }
+function tambah(){ q++; document.getElementById("qty").innerText=q }
+function kurang(){ if(q>1){ q--; document.getElementById("qty").innerText=q } }
+
+/* ===== CART ===== */
+function addCart(i){
+  const p = data[i]
+  if(p.stok && q>p.stok){ toast("Qty melebihi stok"); return }
+  const idx = cart.findIndex(x=>x.i===i)
+  if(idx>-1) cart[idx].q += q
+  else cart.push({i,q})
+  save(); updateCartUI(); toast("Masuk keranjang")
 }
 
-function tambah(){q++;qty.innerText=q}
-function kurang(){if(q>1){q--;qty.innerText=q}}
-
-function wa(i){
-  let p=data[i]
-  let text=`Halo, saya mau pesan ${p.nama} qty ${q}`
-  window.open(`https://wa.me/628xxxx?text=${text}`)
+function updateCartUI(){
+  const count = cart.reduce((a,b)=>a+b.q,0)
+  const total = cart.reduce((a,b)=>a + (data[b.i].harga*b.q),0)
+  document.getElementById("cartCount").innerText = count+" item"
+  document.getElementById("cartTotal").innerText = rp(total)
+  document.getElementById("cartbar").classList.toggle("hide", count===0)
 }
 
+function checkout(){
+  if(!cart.length) return
+  let msg = "Halo, saya mau pesan:%0A"
+  cart.forEach(c=>{
+    const p = data[c.i]
+    msg += `- ${p.nama} x${c.q} = ${rp(p.harga*c.q)}%0A`
+  })
+  const total = cart.reduce((a,b)=>a + data[b.i].harga*b.q,0)
+  msg += `%0ATotal: ${rp(total)}`
+  window.open(`https://wa.me/${CONFIG.wa}?text=${msg}`)
+}
+
+/* ===== WA DIRECT ===== */
+function waNow(i){
+  const p = data[i]
+  const text = `Halo, saya mau pesan:%0A- ${p.nama} x${q} = ${rp(p.harga*q)}`
+  window.open(`https://wa.me/${082285712293}?text=${text}`)
+}
+
+/* ===== ADMIN ===== */
+function toggleAdmin(){ admin=!admin; toast(admin?"Admin ON":"Admin OFF") }
+function edit(i){
+  const p=data[i]
+  const n=prompt("Nama",p.nama); if(!n) return
+  const h=Number(prompt("Harga",p.harga)); if(!h) return
+  const s=Number(prompt("Stok",p.stok))
+  data[i]={...p,nama:n,harga:h,stok:s}
+  save(); render(); toast("Diupdate")
+}
+function hapus(i){
+  if(confirm("Hapus produk?")){
+    data.splice(i,1); save(); render(); toast("Dihapus")
+  }
+}
+
+/* ===== NAV & SEARCH ===== */
 function nav(id){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'))
-  document.getElementById(id).classList.add('active')
+  document.getElementById("home").style.display = id==='home'?'block':'none'
+  document.getElementById("menu").style.display = id==='menu'?'block':'none'
 }
-
 function cari(k){
-  let hasil=data.filter(p=>p.nama.toLowerCase().includes(k.toLowerCase()))
-  render(hasil)
+  const res = data.filter(p=>p.nama.toLowerCase().includes(k.toLowerCase()))
+  render(res)
 }
 
+/* ===== INIT ===== */
 render()
+updateCartUI()
 
 </script>
-
 </body>
 </html>
