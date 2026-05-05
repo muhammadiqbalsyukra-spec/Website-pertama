@@ -14,6 +14,7 @@ header{
   padding:15px;
   display:flex;
   justify-content:space-between;
+  align-items:center;
 }
 
 .form{padding:10px;background:white;}
@@ -38,6 +39,7 @@ input{
   border-radius:12px;
   padding:10px;
   box-shadow:0 2px 6px rgba(0,0,0,0.1);
+  cursor:pointer;
 }
 
 .card img{
@@ -55,6 +57,10 @@ input{
   width:100%;
   border-radius:10px;
   font-weight:bold;
+}
+
+.btn:disabled{
+  background:gray;
 }
 
 .detail{display:none;padding:15px;}
@@ -87,7 +93,7 @@ input{
   <input type="number" id="stok" placeholder="Stok">
   <input type="file" id="foto" onchange="previewImg()">
   <img id="preview" class="preview" style="display:none">
-  <button class="btn" onclick="tambahProduk()">+ Simpan Produk</button>
+  <button id="btnTambah" class="btn" onclick="tambahProduk()">+ Simpan Produk</button>
 </div>
 
 <div id="catalog" class="grid"></div>
@@ -96,7 +102,8 @@ input{
 <script>
 
 let data = JSON.parse(localStorage.getItem("produk")) || []
-let q=1
+let q = 1
+let loading = false
 
 function simpan(){
   localStorage.setItem("produk", JSON.stringify(data))
@@ -111,7 +118,7 @@ function render(){
       <b>${p.nama}</b><br>
       Rp${p.harga}<br>
       Stok: ${p.stok}
-      <div class="admin" onclick="editProduk(${i});event.stopPropagation()">Edit | Hapus</div>
+      <div class="admin" onclick="event.stopPropagation(); editProduk(${i})">Edit | Hapus</div>
     </div>`
   })
   document.getElementById("catalog").innerHTML=html
@@ -127,39 +134,66 @@ function previewImg(){
   }
 }
 
+function resetForm(){
+  document.getElementById("nama").value=""
+  document.getElementById("harga").value=""
+  document.getElementById("stok").value=""
+  document.getElementById("foto").value=""
+  document.getElementById("preview").style.display="none"
+}
+
 function tambahProduk(){
-  let nama=document.getElementById("nama").value
-  let harga=document.getElementById("harga").value
-  let stok=document.getElementById("stok").value
-  let fileInput=document.getElementById("foto")
-  let file=fileInput.files[0]
+  if(loading) return
+
+  let btn = document.getElementById("btnTambah")
+  let nama = document.getElementById("nama").value.trim()
+  let harga = document.getElementById("harga").value.trim()
+  let stok = document.getElementById("stok").value.trim()
+  let file = document.getElementById("foto").files[0]
 
   if(!nama || !harga || !stok){
     alert("Isi semua data!")
     return
   }
 
-  function simpanProduk(foto){
-    data.push({nama,harga,stok,foto})
+  loading = true
+  btn.disabled = true
+  btn.innerText = "Menyimpan..."
+
+  function selesai(foto){
+    data.push({
+      nama,
+      harga: Number(harga),
+      stok: Number(stok),
+      foto
+    })
+
     simpan()
     render()
+    resetForm()
 
-    // reset form
-    document.getElementById("nama").value=""
-    document.getElementById("harga").value=""
-    document.getElementById("stok").value=""
-    fileInput.value=""
-    document.getElementById("preview").style.display="none"
+    loading = false
+    btn.disabled = false
+    btn.innerText = "+ Simpan Produk"
   }
 
   if(file){
-    let reader=new FileReader()
-    reader.onload=function(e){
-      simpanProduk(e.target.result)
+    let reader = new FileReader()
+
+    reader.onload = function(e){
+      selesai(e.target.result)
     }
+
+    reader.onerror = function(){
+      alert("Gagal baca gambar")
+      loading = false
+      btn.disabled = false
+      btn.innerText = "+ Simpan Produk"
+    }
+
     reader.readAsDataURL(file)
-  }else{
-    simpanProduk("https://picsum.photos/300")
+  } else {
+    selesai("https://picsum.photos/300?random=" + Date.now())
   }
 }
 
@@ -203,20 +237,24 @@ function wa(i){
 }
 
 function editProduk(i){
-  if(confirm("Edit produk?")){
+  let aksi = prompt("Ketik: edit / hapus")
+
+  if(aksi === "edit"){
     let nama=prompt("Nama",data[i].nama)
     let harga=prompt("Harga",data[i].harga)
     let stok=prompt("Stok",data[i].stok)
 
     if(nama && harga && stok){
       data[i].nama=nama
-      data[i].harga=harga
-      data[i].stok=stok
+      data[i].harga=Number(harga)
+      data[i].stok=Number(stok)
       simpan()
       render()
     }
-  }else{
-    if(confirm("Hapus produk ini?")){
+  }
+
+  if(aksi === "hapus"){
+    if(confirm("Yakin hapus?")){
       data.splice(i,1)
       simpan()
       render()
