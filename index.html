@@ -3,615 +3,472 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Marketplace Toko</title>
+
+<title>Muhammad Iqbal Syukra | Datuak Kulabu</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
-:root{
-  --primary:#0d6efd;
-  --green:#25D366;
-  --bg:#f5f5f5;
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
 }
 
-*{box-sizing:border-box}
-
 body{
-  margin:0;
-  font-family:system-ui;
-  background:var(--bg);
+background:#050b1f;
+color:white;
+overflow-x:hidden;
+}
+
+html{
+scroll-behavior:smooth;
+}
+
+:root{
+--gold:#f6c453;
+--blue:#0ea5e9;
+--dark:#081328;
+--card:#101c38;
 }
 
 header{
-  position:sticky;
-  top:0;
-  z-index:100;
-  background:white;
-  padding:10px;
-  box-shadow:0 2px 10px rgba(0,0,0,.08);
+position:fixed;
+top:0;
+left:0;
+width:100%;
+padding:20px 8%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+background:rgba(0,0,0,.4);
+backdrop-filter:blur(12px);
+z-index:999;
 }
 
-.search{
-  display:flex;
-  background:#eee;
-  border-radius:999px;
-  padding:10px;
+.logo{
+font-size:24px;
+font-weight:800;
+color:var(--gold);
 }
 
-.search input{
-  flex:1;
-  border:none;
-  background:transparent;
-  outline:none;
+nav a{
+color:white;
+text-decoration:none;
+margin-left:25px;
+font-weight:500;
 }
 
-.grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:12px;
-  padding:12px;
-  padding-bottom:120px;
+.hero{
+min-height:100vh;
+padding:140px 8% 80px;
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:50px;
+align-items:center;
 }
 
-.card{
-  background:white;
-  border-radius:18px;
-  overflow:hidden;
-  box-shadow:0 4px 12px rgba(0,0,0,.08);
-  cursor:pointer;
-  transition:.2s;
+.hero-text h4{
+color:var(--gold);
+font-size:18px;
+margin-bottom:10px;
 }
 
-.card:active{
-  transform:scale(.97);
+.hero-text h1{
+font-size:65px;
+line-height:1.1;
+font-weight:800;
 }
 
-.card img{
-  width:100%;
-  aspect-ratio:1/1;
-  object-fit:cover;
+.hero-text h2{
+color:var(--gold);
+margin-top:10px;
+font-size:38px;
 }
 
-.card-body{
-  padding:10px;
-}
-
-.title{
-  font-weight:700;
-  font-size:14px;
-}
-
-.price{
-  color:var(--primary);
-  font-weight:bold;
-  margin-top:5px;
-}
-
-.badge{
-  display:inline-block;
-  background:#ff4d4d;
-  color:white;
-  padding:2px 6px;
-  border-radius:6px;
-  font-size:11px;
-  margin-top:5px;
-}
-
-.detail{
-  position:fixed;
-  inset:0;
-  background:white;
-  z-index:999;
-  overflow:auto;
-  display:none;
-}
-
-.detail img{
-  width:100%;
-}
-
-.detail-content{
-  padding:15px;
-}
-
-.qty{
-  display:flex;
-  align-items:center;
-  gap:10px;
-}
-
-.qty button{
-  padding:6px 12px;
+.hero-text p{
+margin-top:20px;
+color:#d0d0d0;
+line-height:1.8;
 }
 
 .btn{
-  width:100%;
-  border:none;
-  border-radius:12px;
-  padding:14px;
-  font-weight:bold;
-  margin-top:10px;
+display:inline-block;
+margin-top:30px;
+padding:14px 28px;
+border-radius:12px;
+background:linear-gradient(90deg,#2563eb,#06b6d4);
+text-decoration:none;
+color:white;
+font-weight:600;
 }
 
-.btn-primary{
-  background:var(--primary);
-  color:white;
+.hero-image{
+text-align:center;
 }
 
-.btn-wa{
-  background:var(--green);
-  color:white;
+.hero-image img{
+width:100%;
+max-width:450px;
+border-radius:25px;
+border:4px solid var(--gold);
+box-shadow:0 0 40px rgba(246,196,83,.3);
 }
 
-.bottom-nav{
-  position:fixed;
-  bottom:0;
-  left:0;
-  right:0;
-  background:white;
-  display:flex;
-  justify-content:space-around;
-  padding:10px;
-  box-shadow:0 -2px 10px rgba(0,0,0,.1);
+.section{
+padding:90px 8%;
 }
 
-.page{
-  display:none;
+.title{
+font-size:38px;
+font-weight:800;
+margin-bottom:40px;
+color:var(--gold);
 }
 
-.active{
-  display:block;
+.about-grid{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:25px;
 }
 
-.form{
-  padding:12px;
-  background:white;
+.card{
+background:var(--card);
+padding:25px;
+border-radius:20px;
+border:1px solid rgba(255,255,255,.08);
 }
 
-input,textarea{
-  width:100%;
-  padding:12px;
-  border-radius:12px;
-  border:1px solid #ddd;
-  margin:6px 0;
+.stats{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:20px;
+margin-top:40px;
 }
 
-.cartbar{
-  position:fixed;
-  left:0;
-  right:0;
-  bottom:65px;
-  background:white;
-  padding:12px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  box-shadow:0 -2px 10px rgba(0,0,0,.1);
+.stat{
+background:linear-gradient(135deg,#1e40af,#06b6d4);
+padding:30px;
+border-radius:20px;
+text-align:center;
 }
 
-.hide{
-  display:none;
+.stat h3{
+font-size:40px;
 }
+
+.projects{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+gap:25px;
+}
+
+.project{
+background:var(--card);
+border-radius:20px;
+overflow:hidden;
+}
+
+.project img{
+width:100%;
+height:220px;
+object-fit:cover;
+}
+
+.project-content{
+padding:20px;
+}
+
+.project-content h3{
+margin-bottom:10px;
+}
+
+.skills{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+gap:20px;
+}
+
+.skill{
+background:var(--card);
+padding:25px;
+text-align:center;
+border-radius:15px;
+}
+
+.quote{
+background:linear-gradient(135deg,#111827,#1e293b);
+padding:50px;
+border-radius:20px;
+text-align:center;
+font-size:28px;
+font-weight:700;
+color:var(--gold);
+}
+
+footer{
+padding:50px;
+text-align:center;
+background:#040917;
+}
+
+.whatsapp{
+position:fixed;
+right:20px;
+bottom:20px;
+width:65px;
+height:65px;
+border-radius:50%;
+background:#25d366;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:28px;
+text-decoration:none;
+color:white;
+}
+
+@media(max-width:900px){
+
+.hero{
+grid-template-columns:1fr;
+text-align:center;
+}
+
+.hero-text h1{
+font-size:45px;
+}
+
+.about-grid{
+grid-template-columns:1fr;
+}
+
+.stats{
+grid-template-columns:repeat(2,1fr);
+}
+
+}
+
 </style>
 </head>
 <body>
 
 <header>
-  <div class="search">
-    <input type="text" placeholder="Cari produk..." oninput="cari(this.value)">
-  </div>
+
+<div class="logo">
+DATUAK KULABU
+</div>
+
+<nav>
+<a href="#home">Beranda</a>
+<a href="#about">Tentang</a>
+<a href="#project">Project</a>
+<a href="#skill">Skill</a>
+<a href="#kontak">Kontak</a>
+</nav>
+
 </header>
 
-<!-- HOME -->
-<div id="home" class="page active">
-  <div id="catalog" class="grid"></div>
+<section class="hero" id="home">
+
+<div class="hero-text">
+
+<h4>Minangkabau Digital Builder</h4>
+
+<h1>
+MUHAMMAD<br>
+IQBAL SYUKRA
+</h1>
+
+<h2>DATUAK KULABU</h2>
+
+<p>
+Berakar dari Agam, Sumatera Barat.
+Bertumbuh untuk Indonesia.
+Mengembangkan solusi digital di bidang
+Sales, Bisnis, dan Teknologi.
+</p>
+
+<a href="https://wa.me/6282285712293" class="btn">
+Hubungi Saya
+</a>
+
 </div>
 
-<!-- ADMIN -->
-<div id="menu" class="page">
-  <div class="form">
+<div class="hero-image">
 
-    <input id="nama" placeholder="Nama produk">
-    <input id="harga" type="number" placeholder="Harga">
-    <input id="stok" type="number" placeholder="Stok">
-    <textarea id="desc" placeholder="Deskripsi"></textarea>
-    <input type="file" id="foto">
+<!-- GANTI DENGAN FOTO HASIL EDIT -->
+<img src="foto-profil.jpg">
 
-    <button class="btn btn-primary" onclick="tambahProduk()">
-      + Tambah Produk
-    </button>
-
-  </div>
 </div>
 
-<!-- DETAIL -->
-<div id="detail" class="detail"></div>
+</section>
 
-<!-- CART -->
-<div id="cartbar" class="cartbar hide">
-  <div>
-    <b id="cartCount">0 item</b>
-    <div id="cartTotal">Rp0</div>
-  </div>
+<section class="section" id="about">
 
-  <button class="btn btn-wa" onclick="checkout()">
-    Checkout WA
-  </button>
+<h2 class="title">Tentang Saya</h2>
+
+<div class="about-grid">
+
+<div class="card">
+<h3>Profil</h3>
+<br>
+<p>
+Muhammad Iqbal Syukra adalah seorang Sales Professional,
+Business Builder dan Tech Enthusiast yang aktif
+mengembangkan aplikasi berbasis web.
+</p>
 </div>
 
-<!-- NAV -->
-<div class="bottom-nav">
-  <div onclick="nav('home')">🏠</div>
-  <div onclick="nav('home')">📦</div>
-  <div onclick="nav('menu')">➕</div>
-  <div onclick="toggleAdmin()">🔐</div>
+<div class="card">
+<h3>Informasi</h3>
+<br>
+<p>Asal : Agam, Sumatera Barat</p>
+<p>Negara : Indonesia</p>
+<p>WA : 082285712293</p>
+<p>Gelar Adat : Datuak Kulabu</p>
 </div>
 
-<!-- FIREBASE -->
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-storage-compat.js"></script>
+</div>
 
-<script>
+<div class="stats">
 
-/* =========================
-   FIREBASE CONFIG
-========================= */
+<div class="stat">
+<h3>170M+</h3>
+<p>Total Omzet</p>
+</div>
 
-  const firebaseConfig = {
-  apiKey: "AIzaSyDruQxhQfsmsDAubunSrohBX9ZALlXtp5E",
-  authDomain: "toko-pakaian-91050.firebaseapp.com",
-  projectId: "toko-pakaian-91050",
-  storageBucket: "toko-pakaian-91050.firebasestorage.app",
-  messagingSenderId: "418943349139",
-  appId: "1:418943349139:web:6e0a3ab8c71e784c7b7866"
-};
+<div class="stat">
+<h3>77+</h3>
+<p>Transaksi</p>
+</div>
 
+<div class="stat">
+<h3>3</h3>
+<p>Project Aktif</p>
+</div>
 
-firebase.initializeApp(firebaseConfig)
+<div class="stat">
+<h3>76%</h3>
+<p>Target Bulanan</p>
+</div>
 
-const db = firebase.firestore()
-const storage = firebase.storage()
+</div>
 
-/* =========================
-   CONFIG
-========================= */
+</section>
 
-const CONFIG = {
-  wa: "6281234567890"
-}
+<section class="section" id="project">
 
-/* =========================
-   STATE
-========================= */
+<h2 class="title">Project Unggulan</h2>
 
-let data=[]
-let cart=[]
-let q=1
-let admin=false
+<div class="projects">
 
-/* =========================
-   UTIL
-========================= */
+<div class="project">
 
-function rp(n){
-  return "Rp" + Number(n||0).toLocaleString('id-ID')
-}
+<img src="salespro.jpg">
 
-/* =========================
-   LOAD PRODUK
-========================= */
+<div class="project-content">
 
-function loadProduk(){
+<h3>Sales Pro Dashboard</h3>
 
-  db.collection("produk")
-  .orderBy("createdAt","desc")
-  .onSnapshot(snapshot=>{
+<p>
+Monitoring omzet, target, transaksi,
+OCR nota, backup dan restore.
+</p>
 
-    data=[]
+</div>
 
-    snapshot.forEach(doc=>{
-      data.push({
-        id:doc.id,
-        ...doc.data()
-      })
-    })
+</div>
 
-    render(data)
-  })
-}
+<div class="project">
 
-/* =========================
-   RENDER
-========================= */
+<img src="edusmart.jpg">
 
-function render(list=data){
+<div class="project-content">
 
-  let html=""
+<h3>EduSmart</h3>
 
-  list.forEach((p,i)=>{
+<p>
+Manajemen siswa, nilai,
+orang tua dan E-Rapor PDF.
+</p>
 
-    html += `
-    <div class="card" onclick="lihat(${i})">
+</div>
 
-      <img src="${p.foto}" onerror="this.src='https://picsum.photos/300?${i}'">
+</div>
 
-      <div class="card-body">
+<div class="project">
 
-        <div class="title">${p.nama}</div>
+<img src="gudang.jpg">
 
-        <div class="price">${rp(p.harga)}</div>
+<div class="project-content">
 
-        ${p.stok < 5 ? '<div class="badge">Stok sedikit</div>' : ''}
+<h3>Gudang App Pro</h3>
 
-      </div>
+<p>
+Aplikasi stok barang,
+barang masuk dan keluar.
+</p>
 
-    </div>`
-  })
+</div>
 
-  document.getElementById("catalog").innerHTML = html
-}
+</div>
 
-/* =========================
-   TAMBAH PRODUK
-========================= */
+</div>
 
-async function tambahProduk(){
+</section>
 
-  let nama=document.getElementById("nama").value.trim()
-  let harga=Number(document.getElementById("harga").value)
-  let stok=Number(document.getElementById("stok").value)
-  let desc=document.getElementById("desc").value.trim()
-  let file=document.getElementById("foto").files[0]
+<section class="section" id="skill">
 
-  if(!nama || !harga){
-    alert("Nama & harga wajib")
-    return
-  }
+<h2 class="title">Skill & Teknologi</h2>
 
-  let fotoUrl = "https://picsum.photos/300"
+<div class="skills">
 
-  if(file){
+<div class="skill">HTML5</div>
+<div class="skill">CSS3</div>
+<div class="skill">JavaScript</div>
+<div class="skill">Firebase</div>
+<div class="skill">Firestore</div>
+<div class="skill">GitHub Pages</div>
+<div class="skill">OCR</div>
+<div class="skill">Dashboard Design</div>
 
-    let namaFile = Date.now() + "_" + file.name
+</div>
 
-    let ref = storage.ref("produk/" + namaFile)
+</section>
 
-    await ref.put(file)
+<section class="section">
 
-    fotoUrl = await ref.getDownloadURL()
-  }
+<div class="quote">
+"Alam Takambang Jadi Guru"
+</div>
 
-  await db.collection("produk").add({
-    nama,
-    harga,
-    stok,
-    desc,
-    foto:fotoUrl,
-    createdAt:Date.now()
-  })
+</section>
 
-  resetForm()
+<footer id="kontak">
 
-  alert("Produk berhasil ditambahkan")
-}
+<h2>DATUAK KULABU</h2>
 
-/* =========================
-   RESET FORM
-========================= */
+<br>
 
-function resetForm(){
-  document.getElementById("nama").value=""
-  document.getElementById("harga").value=""
-  document.getElementById("stok").value=""
-  document.getElementById("desc").value=""
-  document.getElementById("foto").value=""
-}
+<p>WhatsApp : 082285712293</p>
+<p>Agam, Sumatera Barat - Indonesia</p>
 
-/* =========================
-   DETAIL
-========================= */
+<br>
 
-function lihat(i){
+<p>
+© 2026 Muhammad Iqbal Syukra
+</p>
 
-  let p=data[i]
+</footer>
 
-  q=1
+<a
+class="whatsapp"
+href="https://wa.me/6282285712293">
+☎
+</a>
 
-  document.getElementById("detail").innerHTML=`
-
-    <img src="${p.foto}">
-
-    <div class="detail-content">
-
-      <h2>${p.nama}</h2>
-
-      <div class="price">${rp(p.harga)}</div>
-
-      <p>Stok: ${p.stok}</p>
-
-      <p>${p.desc || ''}</p>
-
-      <div class="qty">
-
-        <button onclick="kurang()">-</button>
-
-        <span id="qty">1</span>
-
-        <button onclick="tambah()">+</button>
-
-      </div>
-
-      <button class="btn btn-primary" onclick="addCart(${i})">
-        + Keranjang
-      </button>
-
-      <button class="btn btn-wa" onclick="waNow(${i})">
-        Pesan via WA
-      </button>
-
-      ${admin ? `
-      <button class="btn" onclick="hapus('${p.id}')">
-        Hapus Produk
-      </button>` : ''}
-
-      <button class="btn" onclick="tutup()">
-        Tutup
-      </button>
-
-    </div>
-  `
-
-  document.getElementById("detail").style.display="block"
-}
-
-function tutup(){
-  document.getElementById("detail").style.display="none"
-}
-
-function tambah(){
-  q++
-  document.getElementById("qty").innerText=q
-}
-
-function kurang(){
-  if(q>1){
-    q--
-    document.getElementById("qty").innerText=q
-  }
-}
-
-/* =========================
-   CART
-========================= */
-
-function addCart(i){
-
-  let p=data[i]
-
-  let item = cart.find(x=>x.id===p.id)
-
-  if(item){
-    item.qty += q
-  }else{
-    cart.push({
-      id:p.id,
-      nama:p.nama,
-      harga:p.harga,
-      qty:q
-    })
-  }
-
-  updateCart()
-
-  alert("Masuk keranjang")
-}
-
-function updateCart(){
-
-  let total=0
-  let count=0
-
-  cart.forEach(i=>{
-    total += i.harga * i.qty
-    count += i.qty
-  })
-
-  document.getElementById("cartCount").innerText=count+" item"
-  document.getElementById("cartTotal").innerText=rp(total)
-
-  document.getElementById("cartbar")
-  .classList.toggle("hide", count===0)
-}
-
-/* =========================
-   CHECKOUT
-========================= */
-
-function checkout(){
-
-  let text="Halo, saya mau pesan:%0A"
-
-  let total=0
-
-  cart.forEach(i=>{
-
-    total += i.harga * i.qty
-
-    text += `- ${i.nama} x${i.qty} = ${rp(i.harga*i.qty)}%0A`
-  })
-
-  text += `%0ATotal: ${rp(total)}`
-
-  window.open(`https://wa.me/${CONFIG.wa}?text=${text}`)
-}
-
-function waNow(i){
-
-  let p=data[i]
-
-  let text=`Halo, saya mau pesan:%0A${p.nama}%0AQty:${q}`
-
-  window.open(`https://wa.me/${082285712293}?text=${text}`)
-}
-
-/* =========================
-   HAPUS
-========================= */
-
-async function hapus(id){
-
-  if(confirm("Hapus produk?")){
-
-    await db.collection("produk")
-    .doc(id)
-    .delete()
-
-    tutup()
-  }
-}
-
-/* =========================
-   SEARCH
-========================= */
-
-function cari(k){
-
-  let hasil = data.filter(p=>
-    p.nama.toLowerCase().includes(k.toLowerCase())
-  )
-
-  render(hasil)
-}
-
-/* =========================
-   NAV
-========================= */
-
-function nav(id){
-
-  document.querySelectorAll('.page')
-  .forEach(p=>p.classList.remove('active'))
-
-  document.getElementById(id)
-  .classList.add('active')
-}
-
-/* =========================
-   ADMIN
-========================= */
-
-function toggleAdmin(){
-
-  admin=!admin
-
-  alert(admin ? 'Admin aktif' : 'Admin nonaktif')
-}
-
-/* =========================
-   INIT
-========================= */
-
-loadProduk()
-
-</script>
 </body>
 </html>
