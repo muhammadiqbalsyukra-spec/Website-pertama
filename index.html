@@ -235,11 +235,123 @@ height:280px;
 }
 
 }
+/* NAVBAR */
 
+.navbar{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+padding:20px 50px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+background:rgba(0,0,0,.5);
+backdrop-filter:blur(10px);
+z-index:999;
+}
+
+.logo{
+color:#d4af37;
+font-weight:bold;
+font-size:22px;
+}
+
+.menu a{
+color:white;
+margin-left:20px;
+text-decoration:none;
+font-weight:600;
+}
+
+.menu a:hover{
+color:#d4af37;
+}
+
+/* LOADER */
+
+#loader{
+position:fixed;
+inset:0;
+background:#050816;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+z-index:99999;
+color:#d4af37;
+}
+
+/* TIMELINE */
+
+.timeline{
+display:grid;
+gap:20px;
+}
+
+.timeline-item{
+padding:25px;
+background:#0f172a;
+border-radius:15px;
+border-left:4px solid #d4af37;
+}
+
+/* PARALLAX */
+
+.parallax{
+height:400px;
+background:url('rumah-gadang-bg.jpg');
+background-size:cover;
+background-position:center;
+background-attachment:fixed;
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+font-size:40px;
+font-weight:bold;
+color:white;
+}
+
+/* HOVER */
+
+.project-card{
+transition:.4s;
+}
+
+.project-card:hover{
+transform:translateY(-10px);
+box-shadow:0 0 30px rgba(212,175,55,.5);
+}
 </style>
 </head>
 <body>
+<div id="loader">
+<h1>DATUAK KULABU</h1>
+<p>
+Luxury Minang Edition
+</p>
 
+</div>
+  <nav class="navbar">
+
+<div class="logo">
+DATUAK KULABU
+</div>
+
+<div class="menu">
+
+<a href="#home">Beranda</a>
+
+<a href="#about">Tentang</a>
+
+<a href="#project">Project</a>
+
+<a href="#contact">Kontak</a>
+
+</div>
+
+</nav>
 <section class="hero">
 
 <div class="hero-img">
@@ -591,7 +703,66 @@ Chat WhatsApp
 
 </section>
 
+<section>
 
+<h2 class="section-title">
+Galeri Dokumentasi
+</h2>
+
+<div class="projects">
+
+<div class="project-card">
+
+<img src="galeri1.jpg">
+
+</div>
+
+<div class="project-card">
+
+<img src="galeri2.jpg">
+
+</div>
+
+<div class="project-card">
+
+<img src="galeri3.jpg">
+</div>
+</div>
+
+</section>
+  <section>
+
+<h2 class="section-title">
+Perjalanan Karier
+</h2>
+<div class="timeline">
+<div class="timeline-item">
+<h3>2019</h3>
+<p>Memulai perjalanan sales profesional.</p>
+</div>
+
+<div class="timeline-item">
+<h3>2021</h3>
+<p>Mengelola area distribusi.</p>
+</div>
+
+<div class="timeline-item">
+<h3>2024</h3>
+<p>Membangun dashboard digital.</p>
+</div>
+
+<div class="timeline-item">
+<h3>2026</h3>
+<p>Membangun personal branding digital.</p>
+</div>
+</div>
+</section>
+  
+  <section class="parallax">
+
+ALAM TAKAMBANG JADI GURU
+
+</section>
 <!-- FOOTER -->
 
 <footer class="footer">
@@ -636,33 +807,30 @@ class="whatsapp">
 <script>
 
 const observer = new IntersectionObserver((entries)=>{
-
 entries.forEach(entry=>{
-
 if(entry.isIntersecting){
-
 entry.target.style.opacity='1';
 entry.target.style.transform='translateY(0)';
-
 }
-
 });
 
 });
-
 document.querySelectorAll(
 '.stat-card,.project-card,.quote,.about'
 ).forEach(el=>{
-
 el.style.opacity='0';
 el.style.transform='translateY(40px)';
 el.style.transition='all .8s ease';
-
 observer.observe(el);
-
 });
+</script>
+<script>
+window.onload=function(){
+setTimeout(()=>{
+document.getElementById('loader').style.display='none';
+},2000);
+}
 
 </script>
-
 </body>
 </html>
