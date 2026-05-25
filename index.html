@@ -421,6 +421,54 @@ color:#d4af37;
 font-size:40px;
 font-weight:bold;
 }
+  #themeToggle{
+background:#d4af37;
+border:none;
+padding:10px 15px;
+border-radius:50%;
+cursor:pointer;
+font-size:18px;
+}
+  body.light{
+background:#f4f4f4;
+color:#222;
+}
+body.light .card,
+body.light .skill-card{
+background:white;
+color:black;
+}
+  #topBtn{
+position:fixed;
+right:20px;
+bottom:20px;
+width:50px;
+height:50px;
+border:none;
+border-radius:50%;
+background:#d4af37;
+cursor:pointer;
+}
+  .particle{
+position:fixed;
+width:4px;
+height:4px;
+background:#d4af37;
+border-radius:50%;
+animation:float 10s linear infinite;
+}
+
+@keyframes float{
+
+0%{
+transform:translateY(100vh);
+}
+
+100%{
+transform:translateY(-100px);
+}
+
+}
 </style>
 </head>
 <body>
@@ -431,6 +479,10 @@ font-weight:bold;
 Tuah Minang Edition
 </p>
 </div>
+  <div class="particle"></div>
+<div class="particle"></div>
+<div class="particle"></div>
+<div class="particle"></div>
   <nav class="navbar">
 
 <div class="logo">
@@ -444,7 +496,9 @@ DATUAK KULABU
 <a href="#skill">Skill</a>
 <a href="#gallery">Galeri</a>
 <a href="#contact">Kontak</a>
-
+<button id="themeToggle">
+🌙
+</button>
 </div>
 
 </nav>
@@ -506,14 +560,11 @@ pendidikan, distribusi, dan penjualan.
 <h2 class="section-title">
 Pencapaian & Statistik
 </h2>
-
 <div class="stats">
-
 <div class="stat-card">
 <h3>4+</h3>
 <p>Tahun Pengalaman Sales</p>
 </div>
-
 <div class="stat-card">
 <h3>600+</h3>
 <p>Kunjungan Toko</p>
@@ -786,17 +837,17 @@ Chat WhatsApp
 <div class="stats">
 
 <div>
-<h3>10+</h3>
+<h3 class="counter" data-target="5">0</h3>
 <p>Tahun Pengalaman</p>
 </div>
 
 <div>
-<h3>100+</h3>
+<h3 class="counter" data-target="12">0</h3>
 <p>Project Digital</p>
 </div>
 
 <div>
-<h3>50+</h3>
+<h3 class="counter" data-target="50">0</h3>
 <p>Mitra Bisnis</p>
 </div>
 
@@ -994,6 +1045,52 @@ window.addEventListener('load',()=>{
 document.getElementById('loader')
 .style.display='none';
 });
+</script>
+  
+  <script>
+document.getElementById("themeToggle")
+.addEventListener("click",()=>{
+document.body.classList.toggle("light");
+});
+</script>
+
+  <script>
+const counters =
+document.querySelectorAll('.counter');
+counters.forEach(counter=>{
+const update=()=>{
+const target=+counter.dataset.target;
+const current=+counter.innerText;
+const increment=target/100;
+if(current<target){
+counter.innerText=
+Math.ceil(current+increment);
+setTimeout(update,20);
+}else{
+counter.innerText=target+"+";
+}
+};
+update();
+});
+
+</script>
+  <button id="topBtn">
+
+⬆
+
+</button>
+  <script>
+
+topBtn.onclick=()=>{
+
+window.scrollTo({
+
+top:0,
+behavior:'smooth'
+
+});
+
+};
 
 </script>
 </body>
