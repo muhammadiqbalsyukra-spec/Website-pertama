@@ -3,79 +3,666 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Muhammad Iqbal Syukra | Datuak Kulabu</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
 <style>
-body{margin:0;font-family:Arial;background:#050b1a;color:#fff}
-.hero{padding:60px;text-align:center;background:linear-gradient(135deg,#08142f,#0f6bdc)}
-.hero img{width:280px;border-radius:20px;border:4px solid gold}
-h1{font-size:48px;margin:10px 0}
-.gold{color:gold}
-.section{padding:50px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
-.card{background:#101b34;padding:20px;border-radius:18px}
-.card img{width:100%;border-radius:10px}
-.footer{text-align:center;padding:40px;background:#08142f}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+scroll-behavior:smooth;
+}
+
+body{
+background:#050816;
+color:white;
+overflow-x:hidden;
+}
+
+body::before{
+content:'';
+position:fixed;
+inset:0;
+background:url('rumah-gadang-bg.jpg');
+background-size:cover;
+background-position:center;
+opacity:.06;
+z-index:-1;
+}
+
+:root{
+--gold:#d4af37;
+--gold2:#f7d774;
+--dark:#050816;
+--card:#0f172a;
+}
+
+section{
+padding:90px 8%;
+}
+
+.hero{
+min-height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+gap:70px;
+flex-wrap:wrap;
+}
+
+.hero-img{
+width:380px;
+height:380px;
+border-radius:30px;
+overflow:hidden;
+border:4px solid var(--gold);
+box-shadow:0 0 40px rgba(212,175,55,.3);
+}
+
+.hero-img img{
+width:100%;
+height:100%;
+object-fit:cover;
+}
+
+.hero-text{
+max-width:650px;
+}
+
+.hero-text h1{
+font-size:4rem;
+line-height:1.1;
+font-weight:800;
+}
+
+.hero-text h2{
+color:var(--gold);
+margin-top:10px;
+font-size:2rem;
+}
+
+.hero-text p{
+margin-top:20px;
+font-size:1.1rem;
+opacity:.9;
+line-height:1.8;
+}
+
+.btn-group{
+margin-top:30px;
+display:flex;
+gap:15px;
+flex-wrap:wrap;
+}
+
+.btn{
+padding:15px 30px;
+border:none;
+border-radius:12px;
+text-decoration:none;
+font-weight:700;
+transition:.3s;
+}
+
+.btn-primary{
+background:linear-gradient(135deg,var(--gold),var(--gold2));
+color:black;
+}
+
+.btn-secondary{
+border:2px solid var(--gold);
+color:var(--gold);
+}
+
+.btn:hover{
+transform:translateY(-3px);
+}
+
+.section-title{
+text-align:center;
+font-size:2.7rem;
+margin-bottom:50px;
+color:var(--gold);
+}
+
+.stats{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:25px;
+}
+
+.stat-card{
+background:var(--card);
+padding:30px;
+border-radius:20px;
+text-align:center;
+border:1px solid rgba(255,255,255,.08);
+}
+
+.stat-card h3{
+font-size:2.5rem;
+color:var(--gold);
+}
+
+.projects{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+gap:25px;
+}
+
+.project-card{
+background:var(--card);
+border-radius:20px;
+overflow:hidden;
+transition:.4s;
+border:1px solid rgba(255,255,255,.08);
+}
+
+.project-card:hover{
+transform:translateY(-8px);
+}
+
+.project-card img{
+width:100%;
+height:220px;
+object-fit:cover;
+}
+
+.project-content{
+padding:25px;
+}
+
+.project-content h3{
+margin-bottom:10px;
+color:var(--gold);
+}
+
+.about{
+max-width:900px;
+margin:auto;
+text-align:center;
+font-size:1.1rem;
+line-height:2;
+}
+
+.quote{
+background:linear-gradient(135deg,#111827,#0f172a);
+border-left:5px solid var(--gold);
+padding:30px;
+border-radius:20px;
+font-size:1.3rem;
+text-align:center;
+font-style:italic;
+}
+
+.footer{
+text-align:center;
+padding:50px;
+background:#020617;
+}
+
+.whatsapp{
+position:fixed;
+bottom:25px;
+right:25px;
+width:65px;
+height:65px;
+border-radius:50%;
+background:#25d366;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:30px;
+text-decoration:none;
+color:white;
+box-shadow:0 0 20px rgba(37,211,102,.4);
+}
+
+@media(max-width:768px){
+
+.hero-text h1{
+font-size:2.6rem;
+}
+
+.hero-img{
+width:280px;
+height:280px;
+}
+
+}
+
 </style>
 </head>
 <body>
-<div class="hero">
-<img src="ChatGPT Image May 24, 2026, 09_05_14 PM.png">
+
+<section class="hero">
+
+<div class="hero-img">
+<img src="foto-profil.jpg" alt="Muhammad Iqbal Syukra">
+</div>
+
+<div class="hero-text">
 <h1>MUHAMMAD IQBAL SYUKRA</h1>
-<h2 class="gold">DATUAK KULABU</h2>
-<p>Sales Professional • Business Builder • Digital Builder</p>
-<p>Agam, Sumatera Barat • Indonesia</p>
-</div>
 
-<div class="section">
-<h2 class="gold">Project Showcase</h2>
-<div class="grid">
-<div class="card">
-<img src="Screenshot 2026-05-24 195343(1).png">
-<h3>Sales Dashboard Pro</h3>
-<p>Monitoring omzet, target, grafik dan laporan.</p>
-</div>
-
-<div class="card">
-<img src="Screenshot 2026-05-24 195430(1).png">
-<h3>Input Sales System</h3>
-<p>Input transaksi dan OCR nota.</p>
-</div>
-
-<div class="card">
-<img src="Screenshot 2026-05-24 195651(1).png">
-<h3>EduSmart</h3>
-<p>Sistem administrasi sekolah modern.</p>
-</div>
-
-<div class="card">
-<img src="Screenshot 2026-05-24 195750(1).png">
-<h3>Data Siswa</h3>
-<p>Data lengkap siswa dan orang tua.</p>
-</div>
-
-<div class="card">
-<img src="Screenshot 2026-05-24 200019(1).png">
-<h3>Gudang App Pro</h3>
-<p>Laporan stok dan transaksi barang.</p>
-</div>
-
-<div class="card">
-<img src="Screenshot 2026-05-24 200056(1).png">
-<h3>Manajemen Stok</h3>
-<p>Barang masuk, keluar dan monitoring stok.</p>
-</div>
-</div>
-</div>
-
-<div class="section">
-<h2 class="gold">Filosofi</h2>
-<p>Alam Takambang Jadi Guru. Belajar dari pengalaman, bertumbuh melalui tantangan, dan menciptakan manfaat melalui usaha serta teknologi.</p>
-</div>
-
-<div class="footer">
 <h2>DATUAK KULABU</h2>
-<p>WA: 082285712293</p>
-<p>Berakar dari Agam, Bertumbuh untuk Indonesia.</p>
+
+<p>
+Sales Professional • Tech Enthusiast • System Builder
+<br>
+Agam, Sumatera Barat • Indonesia
+</p>
+
+<div class="btn-group">
+
+<a href="https://wa.me/6282285712293" class="btn btn-primary">
+WhatsApp
+</a>
+
+<a href="#project" class="btn btn-secondary">
+Lihat Project
+</a>
+
 </div>
+</div>
+
+</section>
+
+<section>
+
+<h2 class="section-title">
+Tentang Saya
+</h2>
+
+<div class="about">
+
+Saya adalah Muhammad Iqbal Syukra, bergelar adat Datuak Kulabu.
+Berasal dari Agam, Sumatera Barat, saya menggabungkan semangat
+profesionalisme, budaya Minangkabau, dan teknologi modern
+untuk membangun sistem digital yang bermanfaat bagi dunia
+pendidikan, distribusi, dan penjualan.
+
+</div>
+
+</section>
+<!-- STATISTIK -->
+
+<section>
+
+<h2 class="section-title">
+Pencapaian & Statistik
+</h2>
+
+<div class="stats">
+
+<div class="stat-card">
+<h3>5+</h3>
+<p>Tahun Pengalaman Sales</p>
+</div>
+
+<div class="stat-card">
+<h3>1000+</h3>
+<p>Kunjungan Toko</p>
+</div>
+
+<div class="stat-card">
+<h3>3</h3>
+<p>Sistem Digital Dibangun</p>
+</div>
+
+<div class="stat-card">
+<h3>∞</h3>
+<p>Semangat Belajar</p>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- PROJECT -->
+
+<section id="project">
+
+<h2 class="section-title">
+Project Showcase
+</h2>
+
+<div class="projects">
+
+<div class="project-card">
+
+<img src="sales-dashboard.png">
+
+<div class="project-content">
+
+<h3>Sales Dashboard Pro</h3>
+
+<p>
+Dashboard monitoring omset, target,
+grafik penjualan, backup data,
+restore data dan multi-user.
+</p>
+
+</div>
+
+</div>
+
+
+<div class="project-card">
+
+<img src="gudang-dashboard.png">
+
+<div class="project-content">
+
+<h3>Gudang Inventory System</h3>
+
+<p>
+Manajemen stok barang,
+barang masuk dan keluar,
+serta laporan inventory realtime.
+</p>
+
+</div>
+
+</div>
+
+
+<div class="project-card">
+
+<img src="edusmart-dashboard.png">
+
+<div class="project-content">
+
+<h3>EduSmart School System</h3>
+
+<p>
+Sistem administrasi sekolah,
+data siswa, input nilai,
+dan e-Rapor digital.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- TIMELINE -->
+
+<section>
+
+<h2 class="section-title">
+Perjalanan Karier
+</h2>
+
+<div class="projects">
+
+<div class="project-card">
+
+<div class="project-content">
+
+<h3>Awal Karier</h3>
+
+<p>
+Memulai perjalanan di dunia distribusi
+dan pemasaran dengan fokus membangun
+hubungan baik dengan pelanggan.
+</p>
+
+</div>
+
+</div>
+
+<div class="project-card">
+
+<div class="project-content">
+
+<h3>Sales Professional</h3>
+
+<p>
+Mengelola area penjualan,
+target omset,
+serta pengembangan jaringan toko.
+</p>
+
+</div>
+
+</div>
+
+<div class="project-card">
+
+<div class="project-content">
+
+<h3>Digital Builder</h3>
+
+<p>
+Mengembangkan dashboard,
+sistem sekolah,
+dan aplikasi bisnis berbasis web.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- FILOSOFI -->
+
+<section>
+
+<h2 class="section-title">
+Filosofi Hidup
+</h2>
+
+<div class="quote">
+
+"Alam Takambang Jadi Guru"
+
+<br><br>
+
+Belajar dari kehidupan,
+beradaptasi dengan perubahan,
+dan terus berkembang untuk memberi manfaat
+bagi keluarga, masyarakat, dan bangsa.
+
+</div>
+
+</section>
+<!-- SKILL -->
+
+<section>
+
+<h2 class="section-title">
+Skill & Teknologi
+</h2>
+
+<div class="stats">
+
+<div class="stat-card">
+<h3>HTML5</h3>
+<p>Struktur Web Modern</p>
+</div>
+
+<div class="stat-card">
+<h3>CSS3</h3>
+<p>UI & Responsive Design</p>
+</div>
+
+<div class="stat-card">
+<h3>JavaScript</h3>
+<p>Interaksi & Otomasi</p>
+</div>
+
+<div class="stat-card">
+<h3>Firebase</h3>
+<p>Database Cloud</p>
+</div>
+
+<div class="stat-card">
+<h3>GitHub</h3>
+<p>Deployment Website</p>
+</div>
+
+<div class="stat-card">
+<h3>Dashboard</h3>
+<p>Monitoring & Analisis</p>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- IDENTITAS MINANG -->
+
+<section>
+
+<h2 class="section-title">
+Ranah Minang
+</h2>
+
+<div class="quote">
+
+Berakar dari Agam,
+Bertumbuh untuk Indonesia.
+
+<br><br>
+
+Nilai Minangkabau mengajarkan
+kerja keras, musyawarah,
+dan semangat belajar sepanjang hayat.
+
+</div>
+
+</section>
+
+
+<!-- KONTAK -->
+
+<section id="contact">
+
+<h2 class="section-title">
+Hubungi Saya
+</h2>
+
+<div class="about">
+
+<h2 style="color:#d4af37;">
+Muhammad Iqbal Syukra
+</h2>
+
+<h3 style="margin-top:10px;">
+DATUAK KULABU
+</h3>
+
+<br>
+
+<p>
+📍 Agam, Sumatera Barat, Indonesia
+</p>
+
+<br>
+
+<p>
+📱 082285712293
+</p>
+
+<br>
+
+<a
+href="https://wa.me/6282285712293"
+class="btn btn-primary">
+Chat WhatsApp
+</a>
+
+</div>
+
+</section>
+
+
+<!-- FOOTER -->
+
+<footer class="footer">
+
+<h2 style="color:#d4af37;">
+DATUAK KULABU
+</h2>
+
+<br>
+
+<p>
+Sales Professional • Tech Enthusiast • System Builder
+</p>
+
+<br>
+
+<p>
+Berakar dari Agam,
+Bertumbuh untuk Indonesia.
+</p>
+
+<br>
+
+<p>
+© 2026 Muhammad Iqbal Syukra
+</p>
+
+</footer>
+
+
+<!-- FLOATING WHATSAPP -->
+
+<a
+href="https://wa.me/6282285712293"
+class="whatsapp">
+💬
+</a>
+
+
+<!-- SCROLL ANIMATION -->
+
+<script>
+
+const observer = new IntersectionObserver((entries)=>{
+
+entries.forEach(entry=>{
+
+if(entry.isIntersecting){
+
+entry.target.style.opacity='1';
+entry.target.style.transform='translateY(0)';
+
+}
+
+});
+
+});
+
+document.querySelectorAll(
+'.stat-card,.project-card,.quote,.about'
+).forEach(el=>{
+
+el.style.opacity='0';
+el.style.transform='translateY(40px)';
+el.style.transition='all .8s ease';
+
+observer.observe(el);
+
+});
+
+</script>
+
 </body>
 </html>
