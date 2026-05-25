@@ -381,15 +381,57 @@ margin:0;
 font-size:14px;
 color:#ccc;
 }
+  .timeline{
+max-width:800px;
+margin:auto;
+}
+.timeline-item{
+background:rgba(255,255,255,.05);
+padding:25px;
+margin-bottom:20px;
+border-left:4px solid #d4af37;
+border-radius:12px;
+}
+  section{
+opacity:0;
+transform:translateY(60px);
+transition:all .8s ease;
+}
+section.show{
+opacity:1;
+transform:translateY(0);
+}
+.minang-badge{
+display:inline-block;
+padding:10px 20px;
+border:1px solid #d4af37;
+border-radius:50px;
+color:#d4af37;
+margin:15px 0;
+}  
+  #loader{
+position:fixed;
+inset:0;
+background:#050505;
+display:flex;
+justify-content:center;
+align-items:center;
+z-index:9999;
+color:#d4af37;
+font-size:40px;
+font-weight:bold;
+}
 </style>
 </head>
 <body>
+  <div id="loader">
+<h1>DATUAK KULABU</h1>
+</div>
 <div id="loader">
 <h1>DATUAK KULABU</h1>
 <p>
 Luxury Minang Edition
 </p>
-
 </div>
   <nav class="navbar">
 
@@ -398,7 +440,6 @@ DATUAK KULABU
 </div>
 
 <div class="menu">
-
 <a href="#home">Beranda</a>
 <a href="#about">Tentang</a>
 <a href="#project">Project</a>
@@ -419,7 +460,9 @@ DATUAK KULABU
 <h1>MUHAMMAD IQBAL SYUKRA</h1>
 
 <h2>DATUAK KULABU</h2>
-
+<div class="minang-badge">
+Alam Takambang Jadi Guru
+</div>
 <p>
 Sales Professional • Tech Enthusiast • System Builder
 <br>
@@ -589,11 +632,8 @@ hubungan baik dengan pelanggan.
 </div>
 
 </div>
-
 <div class="project-card">
-
 <div class="project-content">
-
 <h3>Sales Professional</h3>
 
 <p>
@@ -603,15 +643,11 @@ serta pengembangan jaringan toko.
 </p>
 
 </div>
-
 </div>
 
 <div class="project-card">
-
 <div class="project-content">
-
 <h3>Digital Builder</h3>
-
 <p>
 Mengembangkan dashboard,
 sistem sekolah,
@@ -621,11 +657,9 @@ dan aplikasi bisnis berbasis web.
 </div>
 
 </div>
-
 </div>
 
 </section>
-
 
 <!-- FILOSOFI -->
 
@@ -636,16 +670,12 @@ Filosofi Hidup
 </h2>
 
 <div class="quote">
-
 "Alam Takambang Jadi Guru"
-
 <br><br>
-
 Belajar dari kehidupan,
 beradaptasi dengan perubahan,
 dan terus berkembang untuk memberi manfaat
 bagi keluarga, masyarakat, dan bangsa.
-
 </div>
 
 </section>
@@ -861,6 +891,27 @@ ALAM TAKAMBANG JADI GURU
 </div>
 </div>
 </section>
+<section id="career" class="section">
+
+<h2 class="section-title">
+🏆 Perjalanan Karier
+</h2>
+
+<div class="timeline">
+<div class="timeline-item">
+<h3>Sales Professional</h3>
+<p>Mengelola penjualan dan pengembangan pasar.</p>
+</div>
+<div class="timeline-item">
+<h3>Business Builder</h3>
+<p>Membangun dan mengembangkan usaha mandiri.</p>
+</div>
+<div class="timeline-item">
+<h3>Digital System Builder</h3>
+<p>Mengembangkan dashboard dan sistem berbasis web.</p>
+</div>
+</div>
+</section>
   
   <section id="gallery" class="section">
 <h2 class="section-title">
@@ -938,6 +989,26 @@ setTimeout(()=>{
 document.getElementById('loader').style.display='none';
 },2000);
 }
+</script>
+
+  <script>
+const observer =
+new IntersectionObserver(entries => {
+entries.forEach(entry => {
+if(entry.isIntersecting){
+entry.target.classList.add('show');
+}
+});
+});
+document.querySelectorAll('section')
+.forEach(el => observer.observe(el));
+</script>
+
+  <script>
+window.addEventListener('load',()=>{
+document.getElementById('loader')
+.style.display='none';
+});
 
 </script>
 </body>
