@@ -494,6 +494,62 @@ font-size:22px;
 margin-top:15px;
 min-height:35px;
   }
+  .skill-progress{
+margin-top:30px;
+}
+
+.skill-item{
+margin-bottom:25px;
+}
+
+.skill-item h4{
+margin-bottom:8px;
+color:#d4af37;
+}
+
+.progress{
+height:12px;
+background:rgba(255,255,255,.1);
+border-radius:20px;
+overflow:hidden;
+}
+
+.progress-bar{
+height:100%;
+width:0;
+background:linear-gradient(
+90deg,
+#d4af37,
+#f7d774
+);
+border-radius:20px;
+transition:2s;
+}
+  .modal{
+display:none;
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.8);
+z-index:99999;
+justify-content:center;
+align-items:center;
+}
+
+.modal-content{
+background:#0f172a;
+padding:30px;
+border-radius:20px;
+max-width:500px;
+width:90%;
+border:2px solid #d4af37;
+}
+
+.close-modal{
+float:right;
+cursor:pointer;
+font-size:28px;
+color:#d4af37;
+}
 </style>
 </head>
 <body>
@@ -633,9 +689,15 @@ Dashboard monitoring omset, target,
 grafik penjualan, backup data,
 restore data dan multi-user.
 </p>
+  <button
+class="btn btn-primary detailBtn"
+data-title="Sales Dashboard Pro"
+data-text="Dashboard penjualan, target sales, backup data, grafik penjualan dan multi user.">
 
+Lihat Detail
+
+</button>
 </div>
-
 </div>
 
 
@@ -964,6 +1026,37 @@ ALAM TAKAMBANG JADI GURU
 📱 Digital Marketing
 </div>
 </div>
+    <div class="skill-progress">
+
+<div class="skill-item">
+<h4>HTML5 - 95%</h4>
+<div class="progress">
+<div class="progress-bar" data-width="95%"></div>
+</div>
+</div>
+
+<div class="skill-item">
+<h4>CSS3 - 90%</h4>
+<div class="progress">
+<div class="progress-bar" data-width="90%"></div>
+</div>
+</div>
+
+<div class="skill-item">
+<h4>JavaScript - 80%</h4>
+<div class="progress">
+<div class="progress-bar" data-width="80%"></div>
+</div>
+</div>
+
+<div class="skill-item">
+<h4>Firebase - 75%</h4>
+<div class="progress">
+<div class="progress-bar" data-width="75%"></div>
+</div>
+</div>
+
+</div>
 </section>
 <section id="career" class="section">
 
@@ -999,6 +1092,15 @@ ALAM TAKAMBANG JADI GURU
 </div>
 
 </section>
+  <div id="projectModal" class="modal">
+<div class="modal-content">
+<span class="close-modal">
+×
+</span>
+<h2 id="modalTitle"></h2>
+<p id="modalText"></p>
+</div>
+</div>
 <!-- FOOTER -->
 
 <footer class="footer">
@@ -1179,21 +1281,46 @@ const text =
 let i = 0;
 
 function typing(){
-
 if(i < text.length){
-
 document.getElementById("typing").innerHTML += text.charAt(i);
-
 i++;
-
 setTimeout(typing,80);
-
 }
-
 }
-
 typing();
-
   </script>
+
+  <script>
+window.addEventListener("load",()=>{
+document.querySelectorAll(".progress-bar")
+.forEach(bar=>{
+bar.style.width =
+bar.dataset.width;
+});
+});
+</script>
+
+  <script>
+
+const modal =
+document.getElementById("projectModal");
+document
+.querySelectorAll(".detailBtn")
+.forEach(btn=>{
+btn.onclick=()=>{
+modal.style.display="flex";
+document.getElementById("modalTitle")
+.innerHTML=btn.dataset.title;
+document.getElementById("modalText")
+.innerHTML=btn.dataset.text;
+};
+});
+document
+.querySelector(".close-modal")
+.onclick=()=>{
+modal.style.display="none";
+};
+
+</script>
 </body>
 </html>
