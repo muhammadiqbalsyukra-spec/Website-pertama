@@ -469,6 +469,31 @@ transform:translateY(-100px);
 }
 
 }
+  #musicBtn{
+position:fixed;
+right:20px;
+bottom:90px;
+
+width:55px;
+height:55px;
+
+border:none;
+border-radius:50%;
+
+background:#d4af37;
+
+cursor:pointer;
+
+font-size:22px;
+
+z-index:9999;
+  }
+  #typing{
+color:#d4af37;
+font-size:22px;
+margin-top:15px;
+min-height:35px;
+  }
 </style>
 </head>
 <body>
@@ -515,9 +540,9 @@ DATUAK KULABU
 <div class="minang-badge">
 Alam Takambang Jadi Guru
 </div>
+<h3 id="typing"></h3>
+
 <p>
-Sales • Tech Enthusiast • System Builder
-<br>
 Agam, Sumatera Barat • Indonesia
 </p>
 
@@ -535,7 +560,7 @@ Lihat Project
 </div>
 
 </section>
-
+<section id="about">
 <section>
 
 <h2 class="section-title">
@@ -1093,5 +1118,82 @@ behavior:'smooth'
 };
 
 </script>
+  <audio id="bgMusic" loop>
+<source src="musik-minang.mp3" type="audio/mpeg">
+</audio>
+
+<button id="musicBtn">
+🔇
+</button>
+
+  <script>
+
+const music =
+document.getElementById("bgMusic");
+
+const musicBtn =
+document.getElementById("musicBtn");
+
+music.volume = 0.3;
+
+let started = false;
+
+document.addEventListener("click",()=>{
+
+if(!started){
+
+music.play();
+
+musicBtn.innerHTML="🎵";
+
+started=true;
+
+}
+
+},{once:true});
+
+musicBtn.onclick=()=>{
+
+if(music.paused){
+
+music.play();
+
+musicBtn.innerHTML="🎵";
+
+}else{
+
+music.pause();
+
+musicBtn.innerHTML="🔇";
+
+}
+
+};
+
+  </script>
+  <script>
+
+const text =
+"Sales Professional • Tech Enthusiast • System Builder";
+
+let i = 0;
+
+function typing(){
+
+if(i < text.length){
+
+document.getElementById("typing").innerHTML += text.charAt(i);
+
+i++;
+
+setTimeout(typing,80);
+
+}
+
+}
+
+typing();
+
+  </script>
 </body>
 </html>
