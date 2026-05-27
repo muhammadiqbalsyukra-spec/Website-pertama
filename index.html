@@ -250,10 +250,10 @@ background:#020617;
 
 .whatsapp{
 position:fixed;
-bottom:95px;
+bottom:60px;
 right:20px;
-width:65px;
-height:65px;
+width:55px;
+height:55px;
 border-radius:50%;
 background:#25d366;
 display:flex;
@@ -547,15 +547,12 @@ animation:float 10s linear infinite;
 }
 
 @keyframes float{
-
 0%{
 transform:translateY(100vh);
 }
-
 100%{
 transform:translateY(-100px);
 }
-
 }
   #musicBtn{
 position:fixed;
@@ -567,13 +564,9 @@ height:55px;
 
 border:none;
 border-radius:50%;
-
 background:#d4af37;
-
 cursor:pointer;
-
 font-size:22px;
-
 z-index:9999;
   }
   #typing{
@@ -693,16 +686,26 @@ transition:1s;
 }
 
 .loader-content{
+  backdrop-filter:blur(8px);
+padding:40px;
+border-radius:30px;
+border:1px solid rgba(212,175,55,.2);
+background:rgba(255,255,255,.03);
 text-align:center;
 }
 
 .loader-logo{
-font-size:50px;
-font-weight:bold;
+font-size:48px;
+font-weight:800;
 color:#d4af37;
-letter-spacing:5px;
-margin-bottom:20px;
-animation:pulseLogo 1.5s infinite;
+letter-spacing:4px;
+text-shadow:
+0 0 10px rgba(212,175,55,.6),
+0 0 20px rgba(212,175,55,.4),
+0 0 40px rgba(212,175,55,.3);
+animation:
+loaderGlow 2s ease-in-out infinite,
+loaderFloat 3s ease-in-out infinite;
 }
 
 .loader-line{
@@ -754,15 +757,36 @@ box-shadow:
 0 0 20px rgba(212,175,55,.4),
 0 0 50px rgba(212,175,55,.2);
 }
+  @keyframes loaderGlow{
+
+0%,100%{
+transform:scale(1);
+}
+
+50%{
+transform:scale(1.08);
+}
+
+}
+@keyframes loaderFloat{
+0%,100%{
+transform:translateY(0);
+}
+50%{
+transform:translateY(-12px);
+}
+}
 </style>
 </head>
 <body>
 
 <div id="loader">
     <div class="loader-content">
-        <div class="loader-logo">IQBAL</div>
+      <div class="loader-logo">
+🏠 MINANG CREATIVE
+</div>
         <div class="loader-line"></div>
-        <p>Memuat Portfolio...</p>
+        <p>Alam Takambang Jadi Guru</p>
     </div>
 </div>
   <div class="particle"></div>
