@@ -230,10 +230,25 @@ font-size:2.6rem;
 }
 
 .hero-img{
-width:280px;
-height:280px;
-}
+width:380px;
+height:380px;
+border-radius:30px;
+overflow:hidden;
+border:4px solid var(--gold);
+box-shadow:0 0 40px rgba(212,175,55,.3);
 
+animation:glow 3s infinite alternate;
+}
+  @keyframes glow{
+from{
+box-shadow:
+0 0 20px rgba(212,175,55,.3);
+}
+to{
+box-shadow:
+0 0 70px rgba(212,175,55,.9);
+}
+}
 }
 /* NAVBAR */
 
@@ -550,6 +565,12 @@ cursor:pointer;
 font-size:28px;
 color:#d4af37;
 }
+  #clock{
+color:#d4af37;
+font-size:18px;
+margin-top:10px;
+font-weight:600;
+}
 </style>
 </head>
 <body>
@@ -597,7 +618,7 @@ DATUAK KULABU
 Alam Takambang Jadi Guru
 </div>
 <h3 id="typing"></h3>
-
+<div id="clock"></div>
 <p>
 Agam, Sumatera Barat • Indonesia
 </p>
@@ -617,7 +638,6 @@ Lihat Project
 
 </section>
 <section id="about">
-<section>
 
 <h2 class="section-title">
 Tentang Saya
@@ -700,7 +720,6 @@ Lihat Detail
 </div>
 </div>
 
-
 <div class="project-card">
 
 <img src="gudang-dashboard.png">
@@ -719,92 +738,28 @@ serta laporan inventory realtime.
 
 </div>
 
-
 <div class="project-card">
-
 <img src="edusmart-dashboard.png">
-
 <div class="project-content">
-
 <h3>EduSmart School System</h3>
-
 <p>
 Sistem administrasi sekolah,
 data siswa, input nilai,
 dan e-Rapor digital.
 </p>
-
 </div>
-
 </div>
-
 </div>
-
 </section>
-
-
 <!-- TIMELINE -->
 
-<section>
-
-<h2 class="section-title">
-Perjalanan Karier
-</h2>
-
-<div class="projects">
-
-<div class="project-card">
-
-<div class="project-content">
-
-<h3>Awal Karier</h3>
-
-<p>
-Memulai perjalanan di dunia distribusi
-dan pemasaran dengan fokus membangun
-hubungan baik dengan pelanggan.
-</p>
-
-</div>
-
-</div>
-<div class="project-card">
-<div class="project-content">
-<h3>Sales Professional</h3>
-
-<p>
-Mengelola area penjualan,
-target omset,
-serta pengembangan jaringan toko.
-</p>
-
-</div>
-</div>
-
-<div class="project-card">
-<div class="project-content">
-<h3>Digital Builder</h3>
-<p>
-Mengembangkan dashboard,
-sistem sekolah,
-dan aplikasi bisnis berbasis web.
-</p>
-
-</div>
-
-</div>
-</div>
-
-</section>
 
 <!-- FILOSOFI -->
 
 <section>
-
 <h2 class="section-title">
 Filosofi Hidup
 </h2>
-
 <div class="quote">
 "Alam Takambang Jadi Guru"
 <br><br>
@@ -980,17 +935,14 @@ Perjalanan Karier
 <h3>2019</h3>
 <p>Memulai perjalanan sales profesional.</p>
 </div>
-
 <div class="timeline-item">
 <h3>2021</h3>
 <p>Mengelola area distribusi.</p>
 </div>
-
 <div class="timeline-item">
 <h3>2024</h3>
 <p>Membangun dashboard digital.</p>
 </div>
-
 <div class="timeline-item">
 <h3>2026</h3>
 <p>Membangun personal branding digital.</p>
@@ -1063,7 +1015,6 @@ ALAM TAKAMBANG JADI GURU
 <h2 class="section-title">
 🏆 Perjalanan Karier
 </h2>
-
 <div class="timeline">
 <div class="timeline-item">
 <h3>Sales Professional</h3>
@@ -1321,6 +1272,15 @@ document
 modal.style.display="none";
 };
 
+</script>
+  <script>
+setInterval(()=>{
+const now = new Date();
+document.getElementById("clock")
+.innerHTML =
+"🕒 " +
+now.toLocaleTimeString("id-ID");
+},1000);
 </script>
 </body>
 </html>
