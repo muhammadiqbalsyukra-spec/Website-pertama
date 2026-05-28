@@ -196,11 +196,15 @@ gap:25px;
 }
 
 .project-card{
-background:var(--card);
-border-radius:20px;
-overflow:hidden;
-transition:.4s;
+background:rgba(255,255,255,.05);
+backdrop-filter:blur(12px);
 border:1px solid rgba(255,255,255,.08);
+border-radius:24px;
+overflow:hidden;
+transition:.5s;
+position:relative;
+box-shadow:
+0 8px 32px rgba(0,0,0,.3);
 }
 
 .project-card:hover{
@@ -338,6 +342,14 @@ align-items:center;
 background:rgba(0,0,0,.5);
 backdrop-filter:blur(10px);
 z-index:999;
+  transition:.4s;
+}
+  .navbar.scrolled{
+padding:12px 50px;
+background:rgba(5,8,22,.92);
+backdrop-filter:blur(18px);
+box-shadow:
+0 5px 20px rgba(0,0,0,.4);
 }
 
 .logo{
@@ -835,8 +847,55 @@ right:0;
 margin:0;
 font-size:18px;
 }
-
   }
+  #lightbox{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,.92);
+display:none;
+justify-content:center;
+align-items:center;
+z-index:999999;
+backdrop-filter:blur(10px);
+animation:fadeIn .4s;
+}
+#lightbox img{
+max-width:90%;
+max-height:85%;
+border-radius:20px;
+box-shadow:
+0 0 30px rgba(212,175,55,.4);
+animation:zoomIn .4s;
+}
+#closeLightbox{
+position:absolute;
+top:30px;
+right:40px;
+font-size:50px;
+color:#d4af37;
+cursor:pointer;
+}
+@keyframes fadeIn{
+from{
+opacity:0;
+}
+to{
+opacity:1;
+}
+}
+@keyframes zoomIn{
+from{
+transform:scale(.7);
+opacity:0;
+}
+to{
+transform:scale(1);
+opacity:1;
+}
+}
 </style>
 </head>
 <body>
@@ -1303,7 +1362,6 @@ Bertumbuh untuk Indonesia.
 <!-- SCROLL ANIMATION -->
 
 <script>
-
 const observer = new IntersectionObserver((entries)=>{
 entries.forEach(entry=>{
 if(entry.isIntersecting){
@@ -1356,18 +1414,12 @@ update();
 
 </button>
   <script>
-
 topBtn.onclick=()=>{
-
 window.scrollTo({
-
 top:0,
 behavior:'smooth'
-
 });
-
 };
-
 </script>
   <audio id="bgMusic" loop>
 <source src="musik-minang.mp3" type="audio/mpeg">
@@ -1378,57 +1430,33 @@ behavior:'smooth'
 </button>
 
   <script>
-
 const music =
 document.getElementById("bgMusic");
-
 const musicBtn =
 document.getElementById("musicBtn");
-
 music.volume = 0.3;
-
 let started = false;
-
 document.addEventListener("click",()=>{
-
 if(!started){
-
 music.play();
-
 musicBtn.innerHTML="🎵";
-
 started=true;
-
 }
-
 },{once:true});
-
 musicBtn.onclick=()=>{
-
 if(music.paused){
-
 music.play();
-
 musicBtn.innerHTML="🎵";
-
 }else{
-
 music.pause();
-
 musicBtn.innerHTML="🔇";
-
 }
-
 };
-
   </script>
   <script>
-
 const text =
 "Sales Professional • Tech Enthusiast • System Builder";
-
 let i = 0;
-
 function typing(){
 if(i < text.length){
 document.getElementById("typing").innerHTML += text.charAt(i);
@@ -1450,7 +1478,6 @@ bar.dataset.width;
 </script>
 
   <script>
-
 const modal =
 document.getElementById("projectModal");
 document
@@ -1492,19 +1519,54 @@ document.getElementById("loader").style.display="none";
 });
 </script>
   <script>
-
 const menuToggle =
 document.querySelector(".menu-toggle");
-
 const menu =
 document.querySelector(".menu");
-
 menuToggle.onclick=()=>{
-
 menu.classList.toggle("active");
-
 };
-
   </script>
+  <script>
+window.addEventListener("scroll",()=>{
+const navbar =
+document.querySelector(".navbar");
+navbar.classList.toggle(
+"scrolled",
+window.scrollY > 50
+);
+});
+</script>
+  <div id="lightbox">
+<span id="closeLightbox">
+×
+</span>
+<img id="lightboxImg">
+</div>
+  <script>
+const galleryImages =
+document.querySelectorAll(
+".gallery-grid img"
+);
+const lightbox =
+document.getElementById(
+"lightbox"
+);
+const lightboxImg =
+document.getElementById(
+"lightboxImg"
+);
+galleryImages.forEach(img=>{
+img.onclick=()=>{
+lightbox.style.display="flex";
+lightboxImg.src=img.src;
+};
+});
+document.getElementById(
+"closeLightbox"
+).onclick=()=>{
+lightbox.style.display="none";
+};
+</script>
 </body>
 </html>
