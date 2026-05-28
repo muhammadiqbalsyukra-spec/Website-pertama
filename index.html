@@ -56,6 +56,7 @@ flex-wrap:wrap;
 }
 
 .hero-img{
+position:relative
 width:380px;
 height:380px;
 border-radius:30px;
@@ -358,24 +359,7 @@ color:#d4af37;
 
 /* LOADER */
 
-#loader{
-position:fixed;
-inset:0;
-background:#050816;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-z-index:99999;
-color:#d4af37;
-}
-
 /* TIMELINE */
-
-.timeline{
-display:grid;
-gap:20px;
-}
 
 .timeline-item{
 padding:25px;
@@ -453,12 +437,6 @@ transition:.3s;
 transform:scale(1.03);
 border-color:#d4af37;
 }
-  .stats{
-display:flex;
-gap:30px;
-margin-top:40px;
-flex-wrap:wrap;
-}
 .stats h3{
 color:#d4af37;
 font-size:32px;
@@ -497,18 +475,7 @@ border-radius:50px;
 color:#d4af37;
 margin:15px 0;
 }  
-  #loader{
-position:fixed;
-inset:0;
-background:#050505;
-display:flex;
-justify-content:center;
-align-items:center;
-z-index:9999;
-color:#d4af37;
-font-size:40px;
-font-weight:bold;
-}
+
   #themeToggle{
 background:#d4af37;
 border:none;
@@ -1103,64 +1070,10 @@ Chat WhatsApp
 <h3 class="counter" data-target="50">0</h3>
 <p>Mitra Bisnis</p>
 </div>
-
-</div>
-</div>
-
-</section>
-
-<section>
-
-<h2 class="section-title">
-Galeri Dokumentasi
-</h2>
-
-<div class="projects">
-
-<div class="project-card">
-
-<img src="galeri1.jpg">
-
-</div>
-
-<div class="project-card">
-
-<img src="galeri2.jpg">
-
-</div>
-
-<div class="project-card">
-
-<img src="galeri3.jpg">
-</div>
-</div>
-
-</section>
-  <section>
-
-<h2 class="section-title">
-Perjalanan Karier
-</h2>
-<div class="timeline">
-<div class="timeline-item">
-<h3>2019</h3>
-<p>Memulai perjalanan sales profesional.</p>
-</div>
-<div class="timeline-item">
-<h3>2021</h3>
-<p>Mengelola area distribusi.</p>
-</div>
-<div class="timeline-item">
-<h3>2024</h3>
-<p>Membangun dashboard digital.</p>
-</div>
-<div class="timeline-item">
-<h3>2026</h3>
-<p>Membangun personal branding digital.</p>
 </div>
 </div>
 </section>
-  
+
   <section class="parallax">
 ALAM TAKAMBANG JADI GURU
 </section>
@@ -1218,11 +1131,10 @@ ALAM TAKAMBANG JADI GURU
 <div class="progress-bar" data-width="75%"></div>
 </div>
 </div>
-
 </div>
 </section>
+  
 <section id="career" class="section">
-
 <h2 class="section-title">
 🏆 Perjalanan Karier
 </h2>
@@ -1312,20 +1224,6 @@ el.style.opacity='0';
 el.style.transform='translateY(40px)';
 el.style.transition='all .8s ease';
 observer.observe(el);
-});
-</script>
-<script>
-window.onload=function(){
-setTimeout(()=>{
-document.getElementById('loader').style.display='none';
-},2000);
-}
-</script>
-
-  <script>
-window.addEventListener('load',()=>{
-document.getElementById('loader')
-.style.display='none';
 });
 </script>
   
@@ -1488,23 +1386,14 @@ now.toLocaleTimeString("id-ID");
 </script>
 
   <script>
-
 window.addEventListener("load",()=>{
-
 setTimeout(()=>{
-
 document.getElementById("loader").style.opacity="0";
-
 setTimeout(()=>{
-
 document.getElementById("loader").style.display="none";
-
 },1000);
-
 },2500);
-
 });
-
 </script>
 </body>
 </html>
