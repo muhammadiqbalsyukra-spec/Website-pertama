@@ -345,7 +345,13 @@ color:#d4af37;
 font-weight:bold;
 font-size:22px;
 }
-
+.menu-toggle{
+display:none;
+font-size:32px;
+color:#d4af37;
+cursor:pointer;
+z-index:99999;
+}
 .menu a{
 color:white;
 margin-left:20px;
@@ -743,6 +749,94 @@ transform:translateY(0);
 transform:translateY(-12px);
 }
 }
+  @media(max-width:768px){
+
+.hero{
+flex-direction:column;
+text-align:center;
+padding-top:120px;
+}
+.hero-content{
+max-width:100%;
+}
+.hero h1{
+font-size:42px;
+line-height:1.2;
+}
+.hero-img{
+width:280px;
+height:280px;
+margin-bottom:30px;
+}
+.nav-links{
+position:fixed;
+top:80px;
+right:-100%;
+width:250px;
+height:100vh;
+background:rgba(5,8,22,.95);
+backdrop-filter:blur(10px);
+flex-direction:column;
+padding:40px;
+transition:.5s;
+}
+.nav-links.active{
+right:0;
+}
+.section-title{
+font-size:34px;
+}
+.stats{
+grid-template-columns:1fr;
+}
+.project-grid{
+grid-template-columns:1fr;
+}
+.gallery-grid{
+grid-template-columns:1fr;
+}
+  }
+  @media(max-width:768px){
+
+.menu-toggle{
+display:block;
+}
+
+.menu{
+
+position:fixed;
+
+top:80px;
+right:-100%;
+
+width:250px;
+height:100vh;
+
+background:rgba(5,8,22,.95);
+
+backdrop-filter:blur(10px);
+
+display:flex;
+flex-direction:column;
+
+padding:40px 20px;
+
+transition:.5s;
+
+gap:20px;
+
+}
+
+.menu.active{
+right:0;
+}
+
+.menu a{
+margin:0;
+font-size:18px;
+}
+
+  }
 </style>
 </head>
 <body>
@@ -765,7 +859,9 @@ transform:translateY(-12px);
 <div class="logo">
 DATUAK KULABU
 </div>
-
+<div class="menu-toggle">
+☰
+</div>
 <div class="menu">
 <a href="#home">Beranda</a>
 <a href="#about">Tentang</a>
@@ -1395,5 +1491,20 @@ document.getElementById("loader").style.display="none";
 },2500);
 });
 </script>
+  <script>
+
+const menuToggle =
+document.querySelector(".menu-toggle");
+
+const menu =
+document.querySelector(".menu");
+
+menuToggle.onclick=()=>{
+
+menu.classList.toggle("active");
+
+};
+
+  </script>
 </body>
 </html>
